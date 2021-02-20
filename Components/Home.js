@@ -1,8 +1,12 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { Text, View } from 'react-native'
+import { FixtureUI } from './laliga/fixtureUI'
 
 
 export const Home = () =>
 {
-    return <Text>Home Page</Text>
+    return <View>
+        <Text>Home Page</Text>
+        <FixtureUI />
+    </View>
 }

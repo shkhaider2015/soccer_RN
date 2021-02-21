@@ -4,20 +4,20 @@ import ATLETICO_MADRID from "../../RawData/images/atletico_madrid.png";
 import BARCELONA from "../../RawData/images/fc_barcelona.gif";
 
 
-const FixtureUI = () =>
+const FixtureUI = ({ item }) =>
 {
     return <View style={styles.root} >
         
-        <View style={{ flex : 3 }} >
-            <Image style={styles.Image} source={ATLETICO_MADRID} />
-            <Text style={styles.teamName} >Ateltico Madrid</Text>
+        <View style={{ flex : 3, alignItems: 'center' }} >
+            <Image style={styles.image} source={item.homeLogo} />
+            <Text style={styles.teamName} >{item.home}</Text>
         </View>
-        <View style={{ flex : 1 }} >
-            <Text >Vs</Text>
+        <View style={{ flex : 1 , alignItems: 'center', alignSelf: 'center' }} >
+            <Text style={{ fontSize: 20, fontWeight: 'bold' }} >Vs</Text>
         </View>
-        <View style={{ flex : 3 }} >
-            <Image style={styles.Image} source={BARCELONA} />
-            <Text style={styles.teamName} >FC Barcelona</Text>
+        <View style={{ flex : 3, alignItems: 'center'  }} >
+            <Image style={styles.image} source={item.awayLogo} />
+            <Text style={styles.teamName} >{item.away}</Text>
         </View>
 
     </View>
@@ -25,15 +25,21 @@ const FixtureUI = () =>
 
 const styles = StyleSheet.create({
     root : {
-        flex : 1,
-        flexDirection : 'row'
+        backgroundColor: "#FFFFFF",
+        flexDirection: 'row',
+        paddingTop: 10,
+        paddingBottom: 10,
+        marginTop : 20
     },
     image : {
-        width : 5,
-        height : 5
+        width : 70,
+        height : 70,
+        resizeMode : 'stretch'
+
     },
     teamName : {
-        fontSize : 10
+        fontSize : 12,
+        marginTop: 5
     }
   });
   

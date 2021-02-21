@@ -61,7 +61,8 @@ const FixtureListUI = () =>
     return <View style={{ backgroundColor : 'white', paddingBottom : 40 }} >
         <FlatList
         data={myData}
-        renderItem={ ({item}) => <FixtureUI item={item} /> } 
+        renderItem={ ({item}) => <FixtureUI item={item} /> }
+        keyExtractor={(item, index) => index.toString()} 
         />
     </View>
 }

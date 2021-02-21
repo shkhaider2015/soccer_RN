@@ -8,6 +8,6 @@ export const Home = () =>
 {
     return <View>
         <Text>Home Page</Text>
-        <FixtureListUI />
+        
     </View>
 }

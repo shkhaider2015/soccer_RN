@@ -60,8 +60,8 @@ const DrawerContent = (props) => {
                         />
                         <Drawer.Item
                             icon={({ color, size }) => (<Icon name="bookmark-outline" color={color} size={size} />)}
-                            label="Settings"
-                            onPress={() => {} }
+                            label="LaLiga"
+                            onPress={() => { props.navigation.navigate('Laliga') } }
                         />
                         <Drawer.Item
                             icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}

@@ -6,19 +6,49 @@ import { FixtureListUI } from './fixtureList'
 const Laliga = () => {
     React.useEffect(
         () => {
-            fetch("https://api-football-v1.p.rapidapi.com/v2/leagues/season/2018", {
-                "method": "GET",
-                "headers": {
-                    "x-rapidapi-key": "2t0E5XaR8PmshNJqHXrNrwBnd9xtp1zkfSCjsn5Y0hHZpzsUhl",
-                    "x-rapidapi-host": "api-football-v1.p.rapidapi.com"
-                }
-            })
-                .then(response => {
-                    console.log("RESPONSE : ",response);
+            async function getData () {
+                const response = await fetch("https://v3.football.api-sports.io/countries", {
+                    "method": "GET",
+                    "headers": {
+                        "x-rapidapi-host": "v3.football.api-sports.io",
+                        "x-rapidapi-key": "bb282edd25b616a90605f35b51ceb83d"
+                    }
                 })
-                .catch(err => {
-                    console.error(err);
-                });
+
+                const data = await response.json()
+                
+
+                console.log("Data : ", res)
+            }
+
+            async function getLeagueId()
+            {
+                
+                const response = await fetch("https://v3.football.api-sports.io/fixtures?id=140", {
+                    "method": "GET",
+                    "headers": {
+                        "x-rapidapi-host": "v3.football.api-sports.io",
+                        "x-rapidapi-key": "bb282edd25b616a90605f35b51ceb83d"
+                    }
+                })
+
+                const data = await response.json()
+                console.log("Data : ", data)
+                for(var i=0; i<data['response'].length; i++ )
+                {
+                    console.log("---> Data : " + data['response'][i]['teams']['away']['name'])
+
+                    for(var x in data['response'][i]['league'])
+                    {
+                        console.log("xxxxxxx : " + data['response'][i]['league']['name'])
+                    }
+
+                    
+                }
+            }
+
+            // getData()
+            getLeagueId()
         },
         []
     )

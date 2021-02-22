@@ -24,7 +24,7 @@ const Laliga = () => {
             async function getLeagueId()
             {
                 
-                const response = await fetch("https://v3.football.api-sports.io/fixtures?id=140", {
+                const response = await fetch("https://v3.football.api-sports.io/fixtures?league=140&season=2020", {
                     "method": "GET",
                     "headers": {
                         "x-rapidapi-host": "v3.football.api-sports.io",
@@ -34,17 +34,6 @@ const Laliga = () => {
 
                 const data = await response.json()
                 console.log("Data : ", data)
-                for(var i=0; i<data['response'].length; i++ )
-                {
-                    console.log("---> Data : " + data['response'][i]['teams']['away']['name'])
-
-                    for(var x in data['response'][i]['league'])
-                    {
-                        console.log("xxxxxxx : " + data['response'][i]['league']['name'])
-                    }
-
-                    
-                }
             }
 
             // getData()

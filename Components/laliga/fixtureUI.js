@@ -9,16 +9,18 @@ const FixtureUI = ({ item }) =>
     return <View style={styles.root} >
         
         <View style={{ flex : 3, alignItems: 'center' }} >
-            <Image style={styles.image} source={item.homeLogo} />
-            <Text style={styles.teamName} >{item.home}</Text>
+            <Image style={styles.image} source={{ uri : item.teams.home.logo}} />
+            <Text style={styles.teamName} >{item.teams.home.name}</Text>
         </View>
         <View style={{ flex : 1 , alignItems: 'center', alignSelf: 'center' }} >
             <Text style={{ fontSize: 20, fontWeight: 'bold' }} >Vs</Text>
         </View>
         <View style={{ flex : 3, alignItems: 'center'  }} >
-            <Image style={styles.image} source={item.awayLogo} />
-            <Text style={styles.teamName} >{item.away}</Text>
+            <Image style={styles.image} source={{ uri : item.teams.away.logo}} />
+            <Text style={styles.teamName} >{item.teams.away.name}</Text>
         </View>
+
+        
 
     </View>
 }

@@ -3,6 +3,7 @@ import { FlatList, View } from 'react-native'
 import FCBarcelona from "../../RawData/images/fc_barcelona.gif";
 import ATLETICO_MADRID from "../../RawData/images/atletico_madrid.png";
 import { FixtureUI } from './fixtureUI';
+import { useSelector } from 'react-redux'
 
 const myData = [
     {
@@ -58,9 +59,11 @@ const myData = [
 
 const FixtureListUI = () =>
 {
+    const select = useSelector(state => state)
+
     return <View style={{ backgroundColor : 'white', paddingBottom : 40 }} >
         <FlatList
-        data={myData}
+        data={select.LeagueFixtures.items}
         renderItem={ ({item}) => <FixtureUI item={item} /> }
         keyExtractor={(item, index) => index.toString()} 
         />

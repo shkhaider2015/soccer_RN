@@ -1,5 +1,9 @@
 import { combineReducers } from "redux"
-import { FixtureList } from "./ActionTypes"
+import { 
+    FETCH_FIXTURE_BEGIN, 
+    FETCH_FIXTURE_SUCCESS, 
+    FETCH_FIXTURE_FAILUR 
+} from "./ActionTypes"
 
 const initialState = {
     fixture: {
@@ -70,12 +74,39 @@ const initialState = {
     }
 }
 
-const LeagueFixures = (state = initialState, action) =>
+const initState = {
+    items : [],
+    loading : false,
+    error : null
+}
+
+const LeagueFixures = (state = initState, action) =>
 {
     switch(action.type)
     {
-        case FixtureList:
-            return [ action.payload, ...state ]
+        case FETCH_FIXTURE_BEGIN:
+            // return [ action.payload, ...state ]
+            console.log("Begin")
+            return{
+                ...state,
+                loading: true,
+                error: null
+            }
+        case FETCH_FIXTURE_SUCCESS:
+            console.log("success")
+            return{
+                ...state,
+                loading: false,
+                items: action.payload.fixture
+            }
+        case FETCH_FIXTURE_FAILUR:
+            console.log("failure")
+            return {
+                ...state,
+                loading: false,
+                error: action.payload.error,
+                items: []
+            }
         default:
             return state
     }

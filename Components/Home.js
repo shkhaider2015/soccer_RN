@@ -6,6 +6,7 @@ import { FixtureUI } from './laliga/fixtureUI'
 
 export const Home = () =>
 {
+    
     return <View>
         <Text>Home Page</Text>
         

@@ -1,7 +1,5 @@
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
-import ATLETICO_MADRID from "../../RawData/images/atletico_madrid.png";
-import BARCELONA from "../../RawData/images/fc_barcelona.gif";
 
 
 const FixtureUI = ({ item }) =>
@@ -13,7 +11,15 @@ const FixtureUI = ({ item }) =>
             <Text style={styles.teamName} >{item.teams.home.name}</Text>
         </View>
         <View style={{ flex : 1 , alignItems: 'center', alignSelf: 'center' }} >
-            <Text style={{ fontSize: 20, fontWeight: 'bold' }} >Vs</Text>
+            
+            {
+                item.fixture.status.short === "FT" ? <View style={{ display : 'flex', flexDirection : 'row' }} >
+                    <Text > { item.goals.home.toString() } </Text> 
+                    <Text style={{ paddingStart : 5, paddingEnd : 5 }} >-</Text> 
+                    <Text> { item.goals.away.toString() } </Text>
+                </View> : <Text style={{ fontSize: 20, fontWeight: 'bold' }} >Vs</Text>
+            }
+            
         </View>
         <View style={{ flex : 3, alignItems: 'center'  }} >
             <Image style={styles.image} source={{ uri : item.teams.away.logo}} />

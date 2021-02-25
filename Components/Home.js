@@ -4,7 +4,7 @@ import { FixtureListUI } from './laliga/fixtureList'
 import { FixtureUI } from './laliga/fixtureUI'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFixtures } from './API/APIActions';
-import { fetchFixturesSuccess } from './Redux/ActionTypes';
+import { fetchFixturesBegin, fetchFixturesFailure, fetchFixturesSuccess } from './Redux/ActionTypes';
 
 
 export const Home = () =>
@@ -15,6 +15,9 @@ export const Home = () =>
         () => {
             async function getLeagueId()
             {
+                dispatch(
+                    fetchFixturesBegin()
+                )
                 
                 const response = await fetch("https://v3.football.api-sports.io/fixtures?league=140&season=2020", {
                     "method": "GET",
@@ -24,11 +27,21 @@ export const Home = () =>
                     }
                 })
 
-                const data = await response.json()
-                console.log("Data : ", data['response'])
-                dispatch(
-                    fetchFixturesSuccess(data['response'])
-                )
+                if(!response.ok)
+                {
+                    dispatch(
+                        fetchFixturesFailure(response.statusText)
+                    )
+                    throw Error(response.statusText);
+                }
+                else
+                {
+                    const data = await response.json()
+                    dispatch(
+                        fetchFixturesSuccess(data['response'])
+                    )
+
+                }
             }
 
             // getData()

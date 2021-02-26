@@ -5,7 +5,7 @@ import { FixtureUI } from './laliga/fixtureUI'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFixtures } from './API/APIActions';
 import { fetchFixturesBegin, fetchFixturesFailure, fetchFixturesSuccess } from './Redux/ActionTypes';
-import { sortByTime } from './Utility/updateFixtureArray';
+import { bubbleSortByTime } from './Utility/updateFixtureArray';
 
 
 export const Home = () =>
@@ -38,9 +38,9 @@ export const Home = () =>
                 else
                 {
                     const data = await response.json()
-                    sortByTime(data['response'])
+                    const data2 = await bubbleSortByTime(data['response'])
                     dispatch(
-                        fetchFixturesSuccess(data['response'])
+                        fetchFixturesSuccess(data2)
                     )
 
                 }

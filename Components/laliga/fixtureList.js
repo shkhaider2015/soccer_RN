@@ -58,6 +58,8 @@ const myData = [
 
 ]
 
+const renderItem =( {item} ) => <MemodFixtureUI item={item} />
+
 const FixtureListUI = () => {
     const [flatListIndex, setFlatListIndex] = React.useState(0)
     const select = useSelector(state => state)
@@ -86,13 +88,14 @@ const FixtureListUI = () => {
             if (refFlatList.current) {
                 refFlatList.current.scrollToIndex({
                     animated: true,
-                    index: select.LeagueFixtures.items.some((obj, ind) => {
-                        console.log("OBJ : ", obj.fixture.status.short)
-                        if (obj.fixture.status.short === "NS" && select.LeagueFixtures.items[ind+1].fixture.status.short === "NS" ) {
-                            console.log("Ind : ", ind)
-                            return ind
-                        }
-                    }),
+                    // index: select.LeagueFixtures.items.some((obj, ind) => {
+                    //     console.log("OBJ : ", obj.fixture.status.short)
+                    //     if (obj.fixture.status.short === "NS" && select.LeagueFixtures.items[ind+1].fixture.status.short === "NS" ) {
+                    //         console.log("Ind : ", ind)
+                    //         return ind
+                    //     }
+                    // }),
+                    index: 0
                 })
             }
         },
@@ -110,17 +113,20 @@ const FixtureListUI = () => {
         return <View style={{ backgroundColor: 'white', marginBottom: 40 }} >
             <FlatList
                 ref={refFlatList}
-                data={select.LeagueFixtures.items}
-                maxToRenderPerBatch={10}
-                initialNumToRender={10}
-                renderItem={({ item }) => <MemodFixtureUI item={item} />}
+                data={select.LeagueFixtures.items.filter((element) => {
+                    if(element.fixture.status.short === "NS")
+                    {
+                        return element
+                    }
+                })}
+                renderItem={renderItem}
                 keyExtractor={(item, index) => index.toString()}
-                onScrollToIndexFailed={info => {
-                    const wait = new Promise(resolve => setTimeout(resolve, 2000));
-                    wait.then(() => {
-                        refFlatList?.current?.scrollToIndex({ index: info.index, animated: false });
-                    })
-                }}
+                // onScrollToIndexFailed={info => {
+                //     const wait = new Promise(resolve => setTimeout(resolve, 2000));
+                //     wait.then(() => {
+                //         refFlatList?.current?.scrollToIndex({ index: info.index, animated: false });
+                //     })
+                // }}
             />
         </View>
     }

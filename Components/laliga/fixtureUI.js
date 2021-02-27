@@ -4,6 +4,7 @@ import { getDateFromMillis } from '../Utility/TimeUtils';
 
 
 const FixtureUI = ({ item }) => {
+
     return <View style={styles.root} >
 
         <View 
@@ -51,7 +52,11 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         paddingTop: 10,
         paddingBottom: 10,
-        marginTop: 20
+        marginTop: 10,
+        marginStart: 10,
+        marginEnd: 10,
+        borderRadius: 10,
+        height: 150,
     },
     subRoot: {
         display: 'flex',

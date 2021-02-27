@@ -1,132 +1,54 @@
 import React from 'react'
-import { FlatList, View, Text } from 'react-native'
-import FCBarcelona from "../../RawData/images/fc_barcelona.gif";
-import ATLETICO_MADRID from "../../RawData/images/atletico_madrid.png";
+import { FlatList, View} from 'react-native'
 import { MemodFixtureUI } from './fixtureUI';
-import { useSelector } from 'react-redux'
-import { todaysDate } from '../Utility/TimeUtils';
 
-const myData = [
-    {
-        home: 'FC barcelona',
-        homeLogo: FCBarcelona,
-        away: 'Atletico Madrid',
-        awayLogo: ATLETICO_MADRID
-    },
-    {
-        home: 'FC barcelona',
-        homeLogo: FCBarcelona,
-        away: 'Atletico Madrid',
-        awayLogo: ATLETICO_MADRID
-    },
-    {
-        home: 'Atletico Madrid',
-        homeLogo: ATLETICO_MADRID,
-        away: 'FC barcelona',
-        awayLogo: FCBarcelona,
-    },
-    {
-        home: 'FC barcelona',
-        homeLogo: FCBarcelona,
-        away: 'Atletico Madrid',
-        awayLogo: ATLETICO_MADRID
-    },
-    {
-        home: 'Atletico Madrid',
-        homeLogo: ATLETICO_MADRID,
-        away: 'FC barcelona',
-        awayLogo: FCBarcelona,
-    },
-    {
-        home: 'Atletico Madrid',
-        homeLogo: ATLETICO_MADRID,
-        away: 'FC barcelona',
-        awayLogo: FCBarcelona,
-    },
-    {
-        home: 'FC barcelona',
-        homeLogo: FCBarcelona,
-        away: 'Atletico Madrid',
-        awayLogo: ATLETICO_MADRID
-    },
-    {
-        home: 'FC barcelona',
-        homeLogo: FCBarcelona,
-        away: 'Atletico Madrid',
-        awayLogo: ATLETICO_MADRID
-    },
+const renderItem = ({ item }) => <MemodFixtureUI item={item} />
 
-]
-
-const renderItem =( {item} ) => <MemodFixtureUI item={item} />
-
-const FixtureListUI = () => {
-    const [flatListIndex, setFlatListIndex] = React.useState(0)
-    const select = useSelector(state => state)
+const FixtureListUI = ({ scrollIndex, data }) => {
     const refFlatList = React.useRef(null)
 
     React.useEffect(
         () => {
-            // select.LeagueFixtures.items.map(
-            //     (obj, ind) => {
-            //         if(todaysDate(obj.fixture.date, new Date()))
-            //         {
-            //             setFlatListIndex(ind)
-            //             break
-            //         }
-            //         else if(obj.fixture.status.short !== "FT")
-            //         {
-            //             setFlatListIndex(ind)
-            //             break
-            //         }
-            //     }
-            // )
-
-
-
-
-            if (refFlatList.current) {
-                refFlatList.current.scrollToIndex({
-                    animated: true,
-                    index: select.LeagueFixtures.items.some((obj, ind) => {
-                        if (obj.fixture.status.short === "NS" ) {
-                            console.log("OBJ : ", obj.fixture.status.short)
-                            console.log("Ind : ", ind)
-                            return ind
-                        }
-                    }),
-                    // index: 0
-                })
-            }
+            setTimeout(() => {
+                if (refFlatList.current) {
+                    refFlatList.current.scrollToIndex({
+                        animated: true,
+                        index: scrollIndex
+                    })
+                }
+            }, 1000);
         },
         []
     )
 
 
-    if (select.LeagueFixtures.loading) {
-        return <View>
-            <Text style={{ marginStart: 'auto', marginEnd: 'auto', marginTop: 20 }} >Wait ...</Text>
-        </View>
-    }
-    else {
 
-        return <View style={{ backgroundColor: 'white', marginBottom: 40 }} >
-            <FlatList
-                ref={refFlatList}
-                data={select.LeagueFixtures.items}
-                renderItem={renderItem}
-                keyExtractor={(item, index) => index.toString()}
-                horizontal={false}
-                disableVirtualization={true}
-                onScrollToIndexFailed={info => {
-                    const wait = new Promise(resolve => setTimeout(resolve, 500));
-                    wait.then(() => {
-                        refFlatList?.current?.scrollToIndex({ index: info.index, animated: false });
-                    })
-                }}
-            />
-        </View>
-    }
+    return <View style={{  marginBottom: 40 }} >
+
+        <FlatList
+                    ref={refFlatList}
+                    data={data}
+                    renderItem={renderItem}
+                    keyExtractor={(item, index) => index.toString()}
+                    getItemLayout={(data, index) => {
+                        const jj = {
+                            length: 160, offset: 160 * index, index
+                        }
+                        return jj
+                    }}
+                    onScrollToIndexFailed={info => {
+                        const wait = new Promise(resolve => setTimeout(resolve, 1000));
+                        wait.then(() => {
+                            console.log("ScrollToIndex Failed : ", info.index)
+                            refFlatList?.current?.scrollToIndex({ index: info.index, animated: false });
+                        })
+                    }}
+                />
+        
+
+
+
+    </View>
 
 }
 

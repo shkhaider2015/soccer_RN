@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchFixtures } from './API/APIActions';
 import { fetchFixturesBegin, fetchFixturesFailure, fetchFixturesSuccess } from './Redux/ActionTypes';
 import { bubbleSortByTime } from './Utility/updateFixtureArray';
+import { TeamStatus } from './TeamStatus/TeamStatus';
+import { UpperTabNavigation } from "./TeamStatus/UpperTabNavigator";
 
 
 export const Home = () =>
@@ -52,8 +54,5 @@ export const Home = () =>
         []
     )
     
-    return <View>
-        <Text>Home Page</Text>
-        
-    </View>
+    return <UpperTabNavigation />
 }

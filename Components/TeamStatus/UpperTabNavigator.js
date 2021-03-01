@@ -12,12 +12,16 @@ const  UpperTabNavigation = () => {
     <Tab.Navigator initialRouteName="TeamStatus" 
     tabBarOptions={{
         activeTintColor: '#e91e63',
-        labelStyle: { fontSize: 12 },
-        style: { backgroundColor: 'powderblue' },
+        labelStyle: { 
+          fontSize: 12 
+        },
+        style: { 
+          backgroundColor: 'powderblue' 
+        },
       }}
     >
         <Tab.Screen name="Laliga" component={Laliga} options={{ tabBarLabel : "Fixtures"}} />
-      <Tab.Screen name="TeamStatus" component={TeamStatus} options={{ tabBarLabel : "States"}} />
+      <Tab.Screen name="TeamStatus" component={TeamStatus} options={{ tabBarLabel : "Standings"}} />
       <Tab.Screen name="About" component={About} options={{ tabBarLabel : "Table"}} />
     </Tab.Navigator>
   );

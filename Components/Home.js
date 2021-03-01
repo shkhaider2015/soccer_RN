@@ -8,6 +8,7 @@ import { fetchFixturesBegin, fetchFixturesFailure, fetchFixturesSuccess } from '
 import { bubbleSortByTime } from './Utility/updateFixtureArray';
 import { TeamStatus } from './TeamStatus/TeamStatus';
 import { UpperTabNavigation } from "./TeamStatus/UpperTabNavigator";
+import { StandingRowUI } from './team/Standings/StandingRowUI';
 
 
 export const Home = () =>
@@ -54,5 +55,5 @@ export const Home = () =>
         []
     )
     
-    return <UpperTabNavigation />
+    return <StandingRowUI />
 }

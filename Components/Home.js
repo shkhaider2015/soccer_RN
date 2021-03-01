@@ -9,6 +9,7 @@ import { bubbleSortByTime } from './Utility/updateFixtureArray';
 import { TeamStatus } from './TeamStatus/TeamStatus';
 import { UpperTabNavigation } from "./TeamStatus/UpperTabNavigator";
 import { StandingRowUI } from './team/Standings/StandingRowUI';
+import { StandingTableUI } from './team/Standings/StandingTableUI';
 
 
 export const Home = () =>
@@ -55,5 +56,5 @@ export const Home = () =>
         []
     )
     
-    return <StandingRowUI />
+    return <StandingTableUI />
 }

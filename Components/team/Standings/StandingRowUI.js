@@ -1,34 +1,19 @@
-import React, { useRef } from 'react'
+import React, { useCallback, useRef } from 'react'
 import { Text, View, Image, FlatList } from 'react-native'
 import ATLMAD from "../../../RawData/images/atletico_madrid.png";
 
 
-const data = [24, 76, 6, 12, 4, 6, 7, 9]
+const data = [24, 76, 6, 12, 4, 6]
 
-const StandingRowUI = ({ scrollPosition }) => {
+const StandingRowUI = ({ data }) => {
 
     const refFlatList = useRef(null)
 
-    React.useEffect(
-        () => {
-            setTimeout(() => {
-                console.log("hjhjh : ", scrollPosition)
-                if (refFlatList.current) {
-                    refFlatList.current.scrollToOffset({
-                        offset: scrollPosition,
-                        animated: true,
-                    })
-                }
-            }, 100);
-        },
-        [scrollPosition]
-    )
 
     return <View style={{
         display: 'flex',
         flexDirection: 'row',
         marginStart: 15,
-        marginEnd: 15,
         paddingStart: 5,
         paddingEnd: 5,
         paddingTop: 5,
@@ -41,7 +26,7 @@ const StandingRowUI = ({ scrollPosition }) => {
                 flex: 1
             }}
         >
-            <Text style={{ flex: 1 }}>1</Text>
+            <Text style={{ flex: 1 }}> {data['rank']} </Text>
             <Image
                 style={{
                     width: 20,
@@ -50,21 +35,21 @@ const StandingRowUI = ({ scrollPosition }) => {
                     flex: 1
 
                 }}
-                source={ATLMAD}
+                source={{ uri: data['team']['logo']  }}
             />
-            <Text style={{ flex: 8, textAlign: 'center' }} >Atletico Madrid</Text>
+            <Text style={{ flex: 8, textAlign: 'center' }} >{data['team']['name']}</Text>
         </View>
 
 
-        <FlatList
-            ref={refFlatList}
-            style={{ flex: 1 }}
-            data={data}
-            renderItem={({ item }) => <Text style={{ width: 30, textAlign: 'center' }} > {item} </Text>}
-            keyExtractor={(item, index) => index.toString()}
-            horizontal={true}
+        <View style={{ flex: 1, flexDirection: 'row' }} >
 
-        />
+            <Text> {data['all']['played']} </Text>
+            <Text> {data['all']['win']} </Text>
+            <Text> {data['all']['draw']} </Text>
+            <Text> {data['all']['lose']} </Text>
+            <Text> {data['goalsDiff']} </Text>
+            <Text> {data['points']} </Text>
+        </View>
 
     </View>
 

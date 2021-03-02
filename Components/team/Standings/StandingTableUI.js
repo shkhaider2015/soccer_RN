@@ -1,11 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Text, View, Image, FlatList } from 'react-native'
 import ATLMAD from "../../../RawData/images/atletico_madrid.png";
+import { LeftSide } from './LeftSide';
 import { StandingRowUI } from './StandingRowUI';
 
 const data = ['MP', 'W', 'D', 'L', 'Pts', 'GF', 'GA', 'GD']
 
 const StandingTableUI = () => {
+
+    const [scrollPosition, setScrollPosition] = useState(0)
+    const jj = false
+    if(jj)
+    {
+        return <LeftSide />
+    }
+    else
+    {
+        
     return <View
     style={{
         borderWidth: 1,
@@ -34,6 +45,7 @@ const StandingTableUI = () => {
             renderItem={({item}) => <Text style={{ width : 30, textAlign: 'center' }} > {item} </Text> }
             keyExtractor={(item, index) => index.toString()}
             horizontal={true}
+            onScroll={(ee) => setScrollPosition(ee.nativeEvent.contentOffset.x)}
             />
 
             {/* <Text style={{ flex: 1 }} >W</Text>
@@ -53,11 +65,14 @@ const StandingTableUI = () => {
 
 
            </View>
+        <StandingRowUI scrollPosition={scrollPosition} />
     
-        <StandingRowUI />
     
     
     </View>
+
+    }
+
 }
 
 export {StandingTableUI}

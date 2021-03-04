@@ -4,6 +4,8 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import { TeamStatus } from "./TeamStatus";
 import { Laliga } from "../laliga/laliga";
 import { About } from "../About";
+import { Fixtures } from "../team/Fixtures/Fixtures";
+import { StandingTableUI } from "../team/Standings/StandingTableUI";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -20,8 +22,8 @@ const  UpperTabNavigation = () => {
         },
       }}
     >
-        <Tab.Screen name="Laliga" component={Laliga} options={{ tabBarLabel : "Fixtures"}} />
-      <Tab.Screen name="TeamStatus" component={TeamStatus} options={{ tabBarLabel : "Standings"}} />
+        <Tab.Screen name="Laliga" component={Fixtures} options={{ tabBarLabel : "Fixtures"}} />
+      <Tab.Screen name="TeamStatus" component={StandingTableUI} options={{ tabBarLabel : "Standings"}} />
       <Tab.Screen name="About" component={About} options={{ tabBarLabel : "Table"}} />
     </Tab.Navigator>
   );

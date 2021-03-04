@@ -52,7 +52,7 @@ const StandingRowUI = ({ data }) => {
                 <Text style={{ marginTop: 5, marginBottom: 5, textAlign: 'center', width: 30 }} > {data['all']['draw']} </Text>
                 <Text style={{ marginTop: 5, marginBottom: 5, textAlign: 'center', width: 30 }} > {data['all']['lose']} </Text>
                 <Text style={{ marginTop: 5, marginBottom: 5, textAlign: 'center', width: 30 }} > {data['goalsDiff']} </Text>
-                <Text style={{ marginTop: 5, marginBottom: 5, textAlign: 'center', width: 30 }} > {data['points']} </Text>
+                <Text style={{ marginTop: 5, marginBottom: 5, textAlign: 'center', width: 30, fontWeight: 'bold' }} > {data['points']} </Text>
             </View>
 
 

@@ -51,10 +51,10 @@ export const Home = () =>
             }
 
             // getData()
-            getLeagueId()
+            // getLeagueId()
         },
         []
     )
     
-    return <StandingTableUI />
+    return <UpperTabNavigation />
 }

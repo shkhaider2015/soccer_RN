@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Text, View, Image, FlatList, ScrollView, Dimensions, SafeAreaView, ProgressBarAndroid } from 'react-native'
+import { Text, View, Image, FlatList, ScrollView, Dimensions, SafeAreaView } from 'react-native'
 import ATLMAD from "../../../RawData/images/atletico_madrid.png";
 import { LeftSide } from './LeftSide';
 import { RightSide } from './RightSide';
 import { StandingRowUI } from './StandingRowUI';
+// import * as Progress from 'react-native-progress'
+import ProgressBar from 'react-native-progress/Bar'
 
 const data = ['MP', 'W', 'D', 'L', 'GD', 'Pts']
 
@@ -43,8 +45,7 @@ const StandingTableUI = () => {
             }
 
 
-            if(!fetchedData)
-            {
+            if (!fetchedData) {
                 getLeagueTable()
             }
         },
@@ -52,50 +53,43 @@ const StandingTableUI = () => {
     )
 
     if (fetchedData === null) {
-        return <ProgressBarAndroid />
+        return <ProgressBar size={30} indeterminate={true} />
     }
     else {
-        return <View
-            style={{
-                borderWidth: 1,
-                borderRadius: 5,
-                borderColor: 'gray'
-
-            }}
-        >
+        return <View >
             <View style={{
                 flexDirection: 'row',
-                marginStart: 15,
-                paddingStart: 5,
-                paddingEnd: 5,
                 paddingTop: 5,
                 paddingBottom: 5,
+                borderWidth: 1
             }} >
 
-                <Text style={{ flex: 1 }} >Club</Text>
+                <View style={{ marginTop: 5, marginBottom: 5, marginStart: 0, flex: 1, textAlign: 'left' }} >
+                    <Text style={{ marginStart: 20 }} >Club</Text>
+                </View>
 
                 <View style={{ flex: 1, flexDirection: 'row' }} >
 
-                    <Text style={{ marginTop: 5, marginBottom: 5, width: 20 }} >MP</Text>
-                    <Text style={{ marginTop: 5, marginBottom: 5, width: 20 }} >W</Text>
-                    <Text style={{ marginTop: 5, marginBottom: 5, width: 20 }} >D</Text>
-                    <Text style={{ marginTop: 5, marginBottom: 5, width: 20 }} >L</Text>
-                    <Text style={{ marginTop: 5, marginBottom: 5, width: 20 }} >GD</Text>
-                    <Text style={{ marginTop: 5, marginBottom: 5, width: 20 }} >Pts</Text>
+                    <Text style={{ marginTop: 5, marginBottom: 5, textAlign: 'center', width: 30 }} >MP</Text>
+                    <Text style={{ marginTop: 5, marginBottom: 5, textAlign: 'center', width: 30 }} >W</Text>
+                    <Text style={{ marginTop: 5, marginBottom: 5, textAlign: 'center', width: 30 }} >D</Text>
+                    <Text style={{ marginTop: 5, marginBottom: 5, textAlign: 'center', width: 30 }} >L</Text>
+                    <Text style={{ marginTop: 5, marginBottom: 5, textAlign: 'center', width: 30 }} >GD</Text>
+                    <Text style={{ marginTop: 5, marginBottom: 5, textAlign: 'center', width: 30 }} >Pts</Text>
                 </View>
 
 
 
             </View>
 
-            {/* <StandingRowUI data={fetchedData} /> */}
-{/* kjkjkkj */}
-            <FlatList
-            data={fetchedData}
-            renderItem={({item}) => <StandingRowUI data={item} />}
-            keyExtractor={(item, index) => index.toString()}
-        
-            />
+            
+            <View style={{ marginBottom: 85, marginTop: 10 }} >
+                <FlatList
+                    data={fetchedData}
+                    renderItem={({ item }) => <StandingRowUI data={item} />}
+                    keyExtractor={(item, index) => index.toString()}
+                />
+            </View>
 
 
 

@@ -89,7 +89,7 @@ const StandingTableUI = () => {
             </View>
 
             {/* <StandingRowUI data={fetchedData} /> */}
-
+{/* kjkjkkj */}
             <FlatList
             data={fetchedData}
             renderItem={({item}) => <StandingRowUI data={item} />}

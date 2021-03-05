@@ -58,5 +58,5 @@ export const Home = () =>
         []
     )
     
-    return <States />
+    return <UpperTabNavigation />
 }

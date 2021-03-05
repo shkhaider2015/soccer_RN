@@ -6,6 +6,8 @@ import { Laliga } from "../laliga/laliga";
 import { About } from "../About";
 import { Fixtures } from "../team/Fixtures/Fixtures";
 import { StandingTableUI } from "../team/Standings/StandingTableUI";
+import { States } from "../team/States/States";
+
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -22,9 +24,9 @@ const  UpperTabNavigation = () => {
         },
       }}
     >
-        <Tab.Screen name="Laliga" component={Fixtures} options={{ tabBarLabel : "Fixtures"}} />
-      <Tab.Screen name="TeamStatus" component={StandingTableUI} options={{ tabBarLabel : "Standings"}} />
-      <Tab.Screen name="About" component={About} options={{ tabBarLabel : "STATES"}} />
+        <Tab.Screen name="Laliga" component={Fixtures} options={{ tabBarLabel : "FIXTURES"}} />
+      <Tab.Screen name="TeamStatus" component={StandingTableUI} options={{ tabBarLabel : "STANDINGS"}} />
+      <Tab.Screen name="States" component={States} options={{ tabBarLabel : "STATES"}} />
     </Tab.Navigator>
   );
 }

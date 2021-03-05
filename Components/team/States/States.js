@@ -1,9 +1,13 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { Text, View } from 'react-native'
+import { StatesUI } from './StatesUI'
 
 
 const States = () => {
-    return <Text>Team Status</Text>
+    return <View>
+
+        <StatesUI />
+    </View>
 }
 
 export {States}

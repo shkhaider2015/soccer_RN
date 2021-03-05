@@ -10,6 +10,8 @@ import { TeamStatus } from './TeamStatus/TeamStatus';
 import { UpperTabNavigation } from "./TeamStatus/UpperTabNavigator";
 import { StandingRowUI } from './team/Standings/StandingRowUI';
 import { StandingTableUI } from './team/Standings/StandingTableUI';
+import { StatesUI } from './team/States/StatesUI';
+import { States } from './team/States/States';
 
 
 export const Home = () =>
@@ -56,5 +58,5 @@ export const Home = () =>
         []
     )
     
-    return <UpperTabNavigation />
+    return <States />
 }

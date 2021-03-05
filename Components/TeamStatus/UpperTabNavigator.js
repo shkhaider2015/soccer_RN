@@ -11,7 +11,7 @@ const Tab = createMaterialTopTabNavigator();
 
 const  UpperTabNavigation = () => {
   return (
-    <Tab.Navigator initialRouteName="TeamStatus" 
+    <Tab.Navigator initialRouteName="Laliga" 
     tabBarOptions={{
         activeTintColor: '#e91e63',
         labelStyle: { 
@@ -24,7 +24,7 @@ const  UpperTabNavigation = () => {
     >
         <Tab.Screen name="Laliga" component={Fixtures} options={{ tabBarLabel : "Fixtures"}} />
       <Tab.Screen name="TeamStatus" component={StandingTableUI} options={{ tabBarLabel : "Standings"}} />
-      <Tab.Screen name="About" component={About} options={{ tabBarLabel : "Table"}} />
+      <Tab.Screen name="About" component={About} options={{ tabBarLabel : "STATES"}} />
     </Tab.Navigator>
   );
 }

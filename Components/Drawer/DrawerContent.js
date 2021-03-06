@@ -9,10 +9,13 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 const DrawerContent = (props) => {
 
     const [isDarkTheme, setIsDarkTheme] = React.useState(false)
+    const [isMajorLeague, setIsMajorLeague] = React.useState(false)
 
-    const toggleTheme = () =>
-    {
+    const toggleTheme = () => {
         setIsDarkTheme(!isDarkTheme)
+    }
+    const toggleMenu = () => {
+        setIsMajorLeague(!isMajorLeague)
     }
 
     return (
@@ -46,37 +49,64 @@ const DrawerContent = (props) => {
                         <Drawer.Item
                             icon={({ color, size }) => (<Icon name="home-outline" color={color} size={size} />)}
                             label="Home"
-                            onPress={() => {props.navigation.navigate('Home')} }
+                            onPress={() => { props.navigation.navigate('StackNavigator') }}
                         />
                         <Drawer.Item
                             icon={({ color, size }) => (<Icon name="account-outline" color={color} size={size} />)}
                             label="Profile"
-                            onPress={() => {props.navigation.navigate('About')} }
+                            onPress={() => { props.navigation.navigate('About') }}
                         />
                         <Drawer.Item
                             icon={({ color, size }) => (<Icon name="bookmark-outline" color={color} size={size} />)}
                             label="Bookmarks"
-                            onPress={() => {} }
+                            onPress={() => { }}
                         />
                         <Drawer.Item
                             icon={({ color, size }) => (<Icon name="bookmark-outline" color={color} size={size} />)}
                             label="LaLiga"
-                            onPress={() => { props.navigation.navigate('Laliga') } }
+                            onPress={() => { props.navigation.navigate('Laliga') }}
                         />
                         <Drawer.Item
                             icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}
-                            label="Support"
-                            onPress={() => {} }
+                            label="Major League"
+                            onPress={() => toggleMenu()}
                         />
+                        {
+                            isMajorLeague
+                                ? <Drawer.Section>
+                                    <Drawer.Item
+                                    style={{ marginStart: 30 }}
+                                        icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}
+                                        label="La Liga"
+                                    />
+                                    <Drawer.Item
+                                    style={{ marginStart: 30 }}
+                                        icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}
+                                        label="English Premier League"
+                                    />
+                                    <Drawer.Item
+                                    style={{ marginStart: 30 }}
+                                        icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}
+                                        label="Serie A"
+                                    />
+                                    <Drawer.Item
+                                    style={{ marginStart: 30 }}
+                                        icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}
+                                        label="Bundesliga"
+                                    />
+                                </Drawer.Section>
+                                : null
+                        }
+
                     </Drawer.Section>
                     <Drawer.Section title="Preferences" >
-                        <TouchableRipple onPress={() => toggleTheme() } >
+                        <TouchableRipple onPress={() => toggleTheme()} >
                             <View style={styles.preference} >
                                 <Text>Dark Theme</Text>
                                 <View pointerEvents="none" >
-                                <Switch value={isDarkTheme} />
+                                    <Switch value={isDarkTheme} />
                                 </View>
-                                
+
                             </View>
                         </TouchableRipple>
                     </Drawer.Section>
@@ -95,7 +125,7 @@ const DrawerContent = (props) => {
     )
 }
 
-export {DrawerContent}
+export { DrawerContent }
 
 const styles = StyleSheet.create({
     drawerContent: {

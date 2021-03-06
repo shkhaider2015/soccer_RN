@@ -23,7 +23,7 @@ const FixtureListUI = ({ scrollIndex, data }) => {
 
 
 
-    return <View style={{  marginBottom: 40 }} >
+    return <View style={{  paddingBottom: 0 }} >
 
         <FlatList
                     ref={refFlatList}

@@ -15,14 +15,17 @@ const  UpperTabNavigation = () => {
   return (
     <Tab.Navigator initialRouteName="Laliga" 
     tabBarOptions={{
-        activeTintColor: '#e91e63',
+        activeTintColor: '#FFFFFF',
         labelStyle: { 
-          fontSize: 12 
+          fontSize: 14 
         },
         style: { 
-          backgroundColor: 'powderblue' 
+          backgroundColor: '#6802cf' 
         },
+        
       }}
+
+      
     >
         <Tab.Screen name="Laliga" component={Fixtures} options={{ tabBarLabel : "FIXTURES"}} />
       <Tab.Screen name="TeamStatus" component={StandingTableUI} options={{ tabBarLabel : "STANDINGS"}} />

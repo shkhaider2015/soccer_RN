@@ -44,9 +44,9 @@ const States = () => {
     }
     else {
 
-        return <View>
+        return <View style={{ paddingBottom: 33 }} >
 
-            <View style={{ flexDirection: 'row', height: 30, alignItems: 'center', backgroundColor: 'white' }} >
+            <View style={{ flexDirection: 'row', height: 30, alignItems: 'center', backgroundColor: 'white', paddingEnd: 10 }} >
                 <Text style={{ flex: 4, paddingStart: 20 }} >Player</Text>
                 <Text style={{ flex: 1, textAlign: 'center' }} >Assist</Text>
                 <Text style={{ flex: 1, textAlign: 'center' }} >Goals</Text>

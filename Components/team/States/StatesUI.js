@@ -8,10 +8,20 @@ const StatesUI = ({ data }) => {
         <View style={{ flex: 4, flexDirection: 'row' }} >
             <Text style={{ flex: 1, textAlign: 'center', alignSelf: 'center' }} >1</Text>
             <Image
-                style={{ width: 60, height: 60, flex: 2 }}
+                style={{ width: 80, height: 80, flex: 2 }}
                 source={{ uri: data.player.photo}}
             />
-            <Text style={{ flex: 6, textAlign: 'center', alignSelf: 'center' }} > {data.player.name} </Text>
+            <View style={{ flex: 6, alignSelf: 'center' }} >
+            <Text style={{ textAlign: 'center', fontSize: 14  }} > {data.player.name} </Text>
+            <View style={{ flexDirection: 'row', alignSelf: 'center', opacity: 0.5 }} >
+                <Image
+                style={{ width: 15, height: 15, alignSelf: 'center' }}
+                source={{ uri: data.statistics[0].team.logo }}
+                />
+                <Text style={{ textAlign: 'center', alignSelf: 'center', fontSize: 12 }} > {data.statistics[0].team.name} </Text>
+            </View>
+
+            </View>
         </View>
 
         <Text style={{ flex: 1, textAlign: 'center', alignSelf: 'center' }} >{data.statistics[0].goals.assists}</Text>

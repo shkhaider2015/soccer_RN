@@ -4,6 +4,8 @@ import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { Avatar, Title, Caption, Paragraph, Drawer, Text, TouchableRipple, Switch } from "react-native-paper";
 // import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import LALIGA_LOGO from "../../RawData/images/laliga.png";
+import BUNDESLIGA_LOGO from "../../RawData/images/bundes.png";
 
 
 const DrawerContent = (props) => {
@@ -76,8 +78,10 @@ const DrawerContent = (props) => {
                                 ? <Drawer.Section>
                                     <Drawer.Item
                                     style={{ marginStart: 30 }}
-                                        icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}
+                                        // icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}
+                                        icon={LALIGA_LOGO}
                                         label="La Liga"
+                                        onPress={() => props.navigation.navigate('StackNavigator', { leagueId : 140 }) }
                                     />
                                     <Drawer.Item
                                     style={{ marginStart: 30 }}
@@ -91,7 +95,8 @@ const DrawerContent = (props) => {
                                     />
                                     <Drawer.Item
                                     style={{ marginStart: 30 }}
-                                        icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}
+                                        // icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}
+                                        icon={BUNDESLIGA_LOGO}
                                         label="Bundesliga"
                                     />
                                 </Drawer.Section>

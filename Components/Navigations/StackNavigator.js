@@ -4,11 +4,26 @@ import {Home} from "../Home"
 
 const Stack = createStackNavigator();
 
-export const  MyStackNavigator = () => {
+const getLeague = (leagueId) => {
+    switch(leagueId)
+    {
+      case 140:
+        return {
+          leagueId: leagueId,
+          title : "La Liga"
+        }
+    }
+}
+
+export const  MyStackNavigator = ({ route, navigation }) => {
+
+  const { leagueId } = route.params;
+
+
   return (
     <Stack.Navigator initialRouteName="Home" >
       <Stack.Screen name="Home" component={Home} options={{
-          title : "La Liga",
+          title : getLeague(leagueId).title,
           headerStyle: {
               backgroundColor: '#6802cf',
               

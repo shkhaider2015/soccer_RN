@@ -6,21 +6,25 @@ import { fetchFixturesBegin, fetchFixturesSuccess, fetchFixturesFailure } from "
 import { bubbleSortByTime } from "../../Utility/updateFixtureArray";
 
 
-const Fixtures = () => {
+const Fixtures = ({route, navigation}) => {
 
     const dispatch = useDispatch()
     const select = useSelector(state => state)
     const [scrollIndex, setScrollIndex] = useState(0)
 
+    const {leagueId} = route.params;
+    console.log("Fixtures LeagueId : ", leagueId)
+
     useEffect(
         () => {
 
             async function getLeagueId() {
+                console.log("getLeagueId === LeagueId : ", leagueId)
                 dispatch(
                     fetchFixturesBegin()
                 )
 
-                const response = await fetch("https://v3.football.api-sports.io/fixtures?league=140&season=2020", {
+                const response = await fetch(`https://v3.football.api-sports.io/fixtures?league=${leagueId}&season=2020`, {
                     "method": "GET",
                     "headers": {
                         "x-rapidapi-host": "v3.football.api-sports.io",
@@ -67,7 +71,7 @@ const Fixtures = () => {
             // }
 
         },
-        [select.LeagueFixtures.items]
+        [leagueId, select.LeagueFixtures.items]
     )
 
 

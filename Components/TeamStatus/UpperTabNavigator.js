@@ -11,7 +11,11 @@ import { States } from "../team/States/States";
 
 const Tab = createMaterialTopTabNavigator();
 
-const  UpperTabNavigation = () => {
+const  UpperTabNavigation = ({route, navigation}) => {
+
+  const {leagueId} = route.params;
+
+  console.log("Tabnav : LeagueId : ", leagueId)
   return (
     <Tab.Navigator initialRouteName="Laliga" 
     tabBarOptions={{
@@ -27,9 +31,9 @@ const  UpperTabNavigation = () => {
 
       
     >
-        <Tab.Screen name="Laliga" component={Fixtures} options={{ tabBarLabel : "FIXTURES"}} />
-      <Tab.Screen name="TeamStatus" component={StandingTableUI} options={{ tabBarLabel : "STANDINGS"}} />
-      <Tab.Screen name="States" component={States} options={{ tabBarLabel : "STATES"}} />
+        <Tab.Screen name="Laliga" component={Fixtures} options={{ tabBarLabel : "FIXTURES"}} initialParams={{leagueId: leagueId}} />
+      <Tab.Screen name="TeamStatus" component={StandingTableUI} options={{ tabBarLabel : "STANDINGS"}} initialParams={{leagueId: leagueId}} />
+      <Tab.Screen name="States" component={States} options={{ tabBarLabel : "STATES"}} initialParams={{leagueId: leagueId}} />
     </Tab.Navigator>
   );
 }

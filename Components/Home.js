@@ -17,6 +17,9 @@ import { States } from './team/States/States';
 export const Home = () =>
 {
     const dispatch = useDispatch()
+    // const {LeagueId} = route.params;
+
+    // console.log("Home : LeagueId : ", LeagueId)
 
     React.useEffect(
         () => {
@@ -58,5 +61,9 @@ export const Home = () =>
         []
     )
     
-    return <UpperTabNavigation />
+    // return <UpperTabNavigation id={LeagueId}/>
+
+    return <View>
+        <Text> kkjjkkkj </Text>
+        </View>
 }

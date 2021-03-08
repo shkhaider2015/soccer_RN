@@ -11,10 +11,10 @@ const Drawer = createDrawerNavigator();
 
 export const NavigationDrawer = () =>
 {
-    return <Drawer.Navigator initialRouteName="StackNavigator" drawerContent={props => <DrawerContent {...props} /> } >
-    <Drawer.Screen name="StackNavigator" component={MyStackNavigator} />
+    return <Drawer.Navigator initialRouteName="About" drawerContent={props => <DrawerContent {...props} /> } >
+    <Drawer.Screen name="StackNavigator" component={MyStackNavigator} initialParams={{ leagueId : 0}}  />
     <Drawer.Screen name="About" component={About} />
-    <Drawer.Screen name="Laliga" component={Laliga} />
+    {/* <Drawer.Screen name="Laliga" component={Laliga} /> */}
   </Drawer.Navigator>
 }
 

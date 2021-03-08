@@ -81,7 +81,9 @@ const DrawerContent = (props) => {
                                         // icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}
                                         icon={LALIGA_LOGO}
                                         label="La Liga"
-                                        onPress={() => props.navigation.navigate('StackNavigator', { leagueId : 140 }) }
+                                        onPress={() => { 
+                                            return props.navigation.navigate('StackNavigator') 
+                                        } }
                                     />
                                     <Drawer.Item
                                     style={{ marginStart: 30 }}
@@ -98,7 +100,10 @@ const DrawerContent = (props) => {
                                         // icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}
                                         icon={BUNDESLIGA_LOGO}
                                         label="Bundesliga"
-                                        onPress={() => props.navigation.navigate('StackNavigator', { leagueId : 78 }) }
+                                        onPress={() => {
+                                            
+                                            return props.navigation.navigate('StackNavigator')
+                                        } }
                                     />
                                 </Drawer.Section>
                                 : null

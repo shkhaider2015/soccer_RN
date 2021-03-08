@@ -112,6 +112,13 @@ const LeagueFixures = (state = initState, action) =>
     }
 }
 
+const SelectedLeague = (state, action) => {
+    switch(action.type)
+    {
+        
+    }
+}
+
 const Reducers = combineReducers({
     LeagueFixtures : LeagueFixures
 })

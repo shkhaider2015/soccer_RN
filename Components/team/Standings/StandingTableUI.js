@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Text, View, Image, FlatList, ScrollView, Dimensions, SafeAreaView } from 'react-native'
 import ATLMAD from "../../../RawData/images/atletico_madrid.png";
 import { LeftSide } from './LeftSide';
@@ -6,6 +6,7 @@ import { RightSide } from './RightSide';
 import { StandingRowUI } from './StandingRowUI';
 // import * as Progress from 'react-native-progress'
 import ProgressBar from 'react-native-progress/Bar'
+import LeagueIdContext from '../Context/mCTX';
 
 const data = ['MP', 'W', 'D', 'L', 'GD', 'Pts']
 
@@ -13,11 +14,13 @@ const data = ['MP', 'W', 'D', 'L', 'GD', 'Pts']
 const StandingTableUI = () => {
 
     const [fetchedData, setFetcheddata] = useState(null)
+    const mCTX = useContext(LeagueIdContext)
 
+    console.log("Standings -------------------> mCTX ", mCTX)
     useEffect(
         () => {
             async function getLeagueTable() {
-                const response = await fetch("https://v3.football.api-sports.io/standings?league=140&season=2020", {
+                const response = await fetch(`https://v3.football.api-sports.io/standings?league=${mCTX}&season=2020`, {
                     "method": "GET",
                     "headers": {
                         "x-rapidapi-host": "v3.football.api-sports.io",
@@ -45,7 +48,8 @@ const StandingTableUI = () => {
             }
 
 
-            if (!fetchedData) {
+            if(mCTX)
+            {
                 getLeagueTable()
             }
         },

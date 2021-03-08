@@ -1,30 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Text, View } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { FixtureListUI } from './fixtureList'
 import { fetchFixturesBegin, fetchFixturesSuccess, fetchFixturesFailure } from "../../Redux/ActionTypes";
 import { bubbleSortByTime } from "../../Utility/updateFixtureArray";
+import LeagueIdContext from '../Context/mCTX';
 
 
-const Fixtures = ({route, navigation}) => {
+const Fixtures = () => {
 
     const dispatch = useDispatch()
+    const mCTX = useContext(LeagueIdContext)
     const select = useSelector(state => state)
     const [scrollIndex, setScrollIndex] = useState(0)
 
-    const {leagueId} = route.params;
-    console.log("Fixtures LeagueId : ", leagueId)
+    // const {leagueId} = route.params;
+    console.log("Fixtures mCTX : ", mCTX)
 
     useEffect(
         () => {
 
             async function getLeagueId() {
-                console.log("getLeagueId === LeagueId : ", leagueId)
                 dispatch(
                     fetchFixturesBegin()
                 )
 
-                const response = await fetch(`https://v3.football.api-sports.io/fixtures?league=${leagueId}&season=2020`, {
+                const response = await fetch(`https://v3.football.api-sports.io/fixtures?league=${mCTX}}&season=2020`, {
                     "method": "GET",
                     "headers": {
                         "x-rapidapi-host": "v3.football.api-sports.io",
@@ -48,10 +49,12 @@ const Fixtures = ({route, navigation}) => {
                 }
             }
 
-            if (select.LeagueFixtures.items.length === 0) {
-                console.log("League Item Length : = 0")
+            if(mCTX)
+            {
                 getLeagueId()
+
             }
+            
             // else
             // {
                 console.log("Item Lrength ==== ", select.LeagueFixtures.items.length)
@@ -71,7 +74,7 @@ const Fixtures = ({route, navigation}) => {
             // }
 
         },
-        [leagueId, select.LeagueFixtures.items]
+        []
     )
 
 

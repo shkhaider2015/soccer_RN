@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import {Home} from "../Home"
 import { View } from 'react-native';
 import { UpperTabNavigation } from "../TeamStatus/UpperTabNavigator";
+import LeagueIdContext from '../team/Context/mCTX';
 
 const Stack = createStackNavigator();
 
@@ -27,24 +28,23 @@ const getLeague = (leagueId) => {
     }
 }
 
-export const  MyStackNavigator = ({ route, navigation }) => {
+export const  MyStackNavigator = () => {
 
-  const { leagueId } = route.params;
+ 
+
+  useEffect(
+    () => {
+      
+    },
+    []
+  )
+
+
   
-
-  console.log("MyStackNavigation: LeagueId : ", leagueId)
-
-
-  if(leagueId === 0)
-  {
-    return <View> Id = 0 </View>
-  }
-  else
-  {
     return (
       <Stack.Navigator initialRouteName="TabNav" >
-        <Stack.Screen name="TabNav" component={UpperTabNavigation} initialParams={{leagueId: leagueId}} options={{
-            title : getLeague(leagueId).title,
+        <Stack.Screen name="TabNav" component={UpperTabNavigation} options={{
+            title : 'kjjhjh',
             headerStyle: {
                 backgroundColor: '#6802cf',
                 
@@ -57,7 +57,6 @@ export const  MyStackNavigator = ({ route, navigation }) => {
         }} />
       </Stack.Navigator>
     );
-  }
 
  
 }

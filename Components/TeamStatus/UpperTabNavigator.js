@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 // import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { TeamStatus } from "./TeamStatus";
@@ -11,11 +11,17 @@ import { States } from "../team/States/States";
 
 const Tab = createMaterialTopTabNavigator();
 
-const  UpperTabNavigation = ({route, navigation}) => {
+const  UpperTabNavigation = () => {
 
-  const {leagueId} = route.params;
+  useEffect(
+    () => {
 
-  console.log("Tabnav : LeagueId : ", leagueId)
+      
+    },
+    []
+  )
+  // console.log("Tabnav : LeagueId : ", leagueId)
+
   return (
     <Tab.Navigator initialRouteName="Laliga" 
     tabBarOptions={{
@@ -31,9 +37,9 @@ const  UpperTabNavigation = ({route, navigation}) => {
 
       
     >
-        <Tab.Screen name="Laliga" component={Fixtures} options={{ tabBarLabel : "FIXTURES"}} initialParams={{leagueId: leagueId}} />
-      <Tab.Screen name="TeamStatus" component={StandingTableUI} options={{ tabBarLabel : "STANDINGS"}} initialParams={{leagueId: leagueId}} />
-      <Tab.Screen name="States" component={States} options={{ tabBarLabel : "STATES"}} initialParams={{leagueId: leagueId}} />
+        <Tab.Screen name="Laliga" component={Fixtures} options={{ tabBarLabel : "FIXTURES"}}  />
+      <Tab.Screen name="Standings" component={StandingTableUI} options={{ tabBarLabel : "STANDINGS"}} />
+      <Tab.Screen name="States" component={States} options={{ tabBarLabel : "STATES"}} />
     </Tab.Navigator>
   );
 }

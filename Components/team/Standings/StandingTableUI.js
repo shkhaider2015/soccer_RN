@@ -20,7 +20,7 @@ const StandingTableUI = () => {
     useEffect(
         () => {
             async function getLeagueTable() {
-                const response = await fetch(`https://v3.football.api-sports.io/standings?league=${mCTX}&season=2020`, {
+                const response = await fetch(`https://v3.football.api-sports.io/standings?league=${mCTX[0]}&season=2020`, {
                     "method": "GET",
                     "headers": {
                         "x-rapidapi-host": "v3.football.api-sports.io",
@@ -35,25 +35,33 @@ const StandingTableUI = () => {
                 else {
                     const data = await response.json()
                     const standings = await data['response'][0]['league']['standings'][0]
-                    var i = 0
-                    standings.map(
-                        (item, index) => {
-                            i++
-                            console.log(i + " kkkk --> ", item.team.logo)
-                        }
-                    )
+                    // var i = 0
+                    // console.log("Standing Data : ", standings)
+                    // await standings.map(
+                    //     (item, index) => {
+                    //         i++
+                    //         console.log(i + " kkkk --> ", item.team.logo)
+                    //     }
+                    // )
                     setFetcheddata(standings)
                 }
 
             }
 
 
-            if(mCTX)
+            if(mCTX[0] !== null)
             {
                 getLeagueTable()
             }
         },
-        [fetchedData]
+        [mCTX[0]]
+    )
+
+    useEffect(
+        () => {
+
+        },
+        []
     )
 
     if (fetchedData === null) {

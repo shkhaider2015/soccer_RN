@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, StyleSheet } from "react-native";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { Avatar, Title, Caption, Paragraph, Drawer, Text, TouchableRipple, Switch } from "react-native-paper";
@@ -6,12 +6,14 @@ import { Avatar, Title, Caption, Paragraph, Drawer, Text, TouchableRipple, Switc
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import LALIGA_LOGO from "../../RawData/images/laliga.png";
 import BUNDESLIGA_LOGO from "../../RawData/images/bundes.png";
+import LeagueIdContext from "../team/Context/mCTX";
 
 
 const DrawerContent = (props) => {
 
     const [isDarkTheme, setIsDarkTheme] = React.useState(false)
     const [isMajorLeague, setIsMajorLeague] = React.useState(false)
+    const leaguemCTX = useContext(LeagueIdContext)
 
     const toggleTheme = () => {
         setIsDarkTheme(!isDarkTheme)
@@ -51,7 +53,7 @@ const DrawerContent = (props) => {
                         <Drawer.Item
                             icon={({ color, size }) => (<Icon name="home-outline" color={color} size={size} />)}
                             label="Home"
-                            onPress={() => { props.navigation.navigate('StackNavigator', {leagueId: 0}) }}
+                            onPress={() => { props.navigation.navigate('StackNavigator') }}
                         />
                         <Drawer.Item
                             icon={({ color, size }) => (<Icon name="account-outline" color={color} size={size} />)}
@@ -82,6 +84,7 @@ const DrawerContent = (props) => {
                                         icon={LALIGA_LOGO}
                                         label="La Liga"
                                         onPress={() => { 
+                                            leaguemCTX[1](140)
                                             return props.navigation.navigate('StackNavigator') 
                                         } }
                                     />
@@ -101,7 +104,7 @@ const DrawerContent = (props) => {
                                         icon={BUNDESLIGA_LOGO}
                                         label="Bundesliga"
                                         onPress={() => {
-                                            
+                                            leaguemCTX[1](78)
                                             return props.navigation.navigate('StackNavigator')
                                         } }
                                     />

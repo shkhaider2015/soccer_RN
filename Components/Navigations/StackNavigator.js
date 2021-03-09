@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
 import {Home} from "../Home"
 import { View } from 'react-native';
@@ -12,17 +12,14 @@ const getLeague = (leagueId) => {
     {
       case 140:
         return {
-          leagueId: leagueId,
           title : "La Liga"
         }
         case 78:
           return{
-            leagueId: leagueId,
             title: "Bundesliga"
           }
       default:
         return{
-          leagueId,
           title : "La Liga"
         }
     }
@@ -30,21 +27,13 @@ const getLeague = (leagueId) => {
 
 export const  MyStackNavigator = () => {
 
- 
 
-  useEffect(
-    () => {
-      
-    },
-    []
-  )
-
-
+  let LeagueCTX = useContext(LeagueIdContext);
   
     return (
       <Stack.Navigator initialRouteName="TabNav" >
         <Stack.Screen name="TabNav" component={UpperTabNavigation} options={{
-            title : 'kjjhjh',
+            title : LeagueCTX[0] !== null ? getLeague(LeagueCTX[0]).title : 0,
             headerStyle: {
                 backgroundColor: '#6802cf',
                 

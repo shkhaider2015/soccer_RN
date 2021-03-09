@@ -13,13 +13,6 @@ const Tab = createMaterialTopTabNavigator();
 
 const  UpperTabNavigation = () => {
 
-  useEffect(
-    () => {
-
-      
-    },
-    []
-  )
   // console.log("Tabnav : LeagueId : ", leagueId)
 
   return (

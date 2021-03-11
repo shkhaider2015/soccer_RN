@@ -16,9 +16,9 @@ const FixtureListUI = ({ scrollIndex, data }) => {
                         index: scrollIndex
                     })
                 }
-            }, 1000);
+            }, 500);
         },
-        []
+        [scrollIndex]
     )
 
 

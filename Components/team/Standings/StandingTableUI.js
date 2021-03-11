@@ -57,12 +57,6 @@ const StandingTableUI = () => {
         [mCTX[0]]
     )
 
-    useEffect(
-        () => {
-
-        },
-        []
-    )
 
     if (fetchedData === null) {
         return <ProgressBar size={30} indeterminate={true} />

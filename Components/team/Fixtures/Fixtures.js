@@ -11,9 +11,10 @@ const Fixtures = () => {
     const dispatch = useDispatch()
     const mCTX = useContext(LeagueIdContext)
     const select = useSelector(state => state)
-    const [fetchedData, setFetcheddata] = useState(null)
+    const [fetchedData, setFetcheddata] = useState([])
     const [scrollIndex, setScrollIndex] = useState(0)
 
+    console.log("jksfjksdjfkjdks : ", mCTX[0])
 
     useEffect(
         () => {
@@ -23,7 +24,7 @@ const Fixtures = () => {
                 //     fetchFixturesBegin()
                 // )
 
-                const response = await fetch(`https://v3.football.api-sports.io/fixtures?league=${mCTX[0]}}&season=2020`, {
+                const response = await fetch(`https://v3.football.api-sports.io/fixtures?league=${mCTX[0]}&season=2020`, {
                     "method": "GET",
                     "headers": {
                         "x-rapidapi-host": "v3.football.api-sports.io",
@@ -37,13 +38,13 @@ const Fixtures = () => {
                 else {
                     const data = await response.json()
                     const data2 = await bubbleSortByTime(data['response'])
+                    
                     setFetcheddata(data2)
 
                 }
             }
 
-            if(mCTX[0] !== null)
-            {
+            if (mCTX[0] !== null) {
                 getLeagueId()
 
             }
@@ -56,21 +57,21 @@ const Fixtures = () => {
         () => {
             console.log("UseEfeect()  2")
 
-            if(fetchedData !== null)
-            {
-                if (scrollIndex === 0 && fetchedData.length !== 0) {
+            
+                if (fetchedData.length !== 0) {
+                    console.log("Fetch data length is not zero", fetchedData.length)
                     for (let i = 0; i < fetchedData.length; i++) {
                         const element = fetchedData[i];
-    
+                        
                         if (element.fixture.status.short === "NS") {
-                            console.log(i)
+                            console.log("Found NS", )
                             setScrollIndex(i)
                             break
                         }
-    
+
                     }
                 }
-            }
+            
         },
         [fetchedData]
     )
@@ -82,7 +83,7 @@ const Fixtures = () => {
         {
             scrollIndex === 0
                 ? <Text>Loading ...</Text>
-                : <FixtureListUI scrollIndex={scrollIndex} data={select.LeagueFixtures.items} />
+                : <FixtureListUI scrollIndex={scrollIndex} data={fetchedData} />
         }
 
 

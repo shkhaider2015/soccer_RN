@@ -92,11 +92,19 @@ const DrawerContent = (props) => {
                                     style={{ marginStart: 30 }}
                                         icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}
                                         label="English Premier League"
+                                        onPress={() => {
+                                            leaguemCTX[1](39)
+                                            return props.navigation.navigate('StackNavigator')
+                                        } }
                                     />
                                     <Drawer.Item
                                     style={{ marginStart: 30 }}
                                         icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}
                                         label="Serie A"
+                                        onPress={() => {
+                                            leaguemCTX[1](135)
+                                            return props.navigation.navigate('StackNavigator')
+                                        } }
                                     />
                                     <Drawer.Item
                                     style={{ marginStart: 30 }}

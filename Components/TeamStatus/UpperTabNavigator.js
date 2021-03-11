@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 // import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { TeamStatus } from "./TeamStatus";
@@ -7,13 +7,15 @@ import { About } from "../About";
 import { Fixtures } from "../team/Fixtures/Fixtures";
 import { StandingTableUI } from "../team/Standings/StandingTableUI";
 import { States } from "../team/States/States";
+import { GetLeague } from "../Utility/UI";
+import LeagueCTX from "../team/Context/mCTX";
 
 
 const Tab = createMaterialTopTabNavigator();
 
 const  UpperTabNavigation = () => {
 
-  // console.log("Tabnav : LeagueId : ", leagueId)
+  const mCTX = useContext(LeagueCTX)
 
   return (
     <Tab.Navigator initialRouteName="Laliga" 
@@ -23,7 +25,7 @@ const  UpperTabNavigation = () => {
           fontSize: 14 
         },
         style: { 
-          backgroundColor: '#6802cf' 
+          backgroundColor: mCTX[0] !== null ? GetLeague(mCTX[0]).color : ""
         },
         
       }}

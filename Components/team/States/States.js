@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { FlatList, Text, View } from 'react-native'
 import { StatesUI } from './StatesUI'
 import ProgressBar from 'react-native-progress/Bar'
+import LeagueIdContext from '../Context/mCTX';
 
 
 const States = () => {
 
     const [fetchedData, setFetcheddata] = useState(null)
+    const mCTX = useContext(LeagueIdContext)
 
     useEffect(
         () => {
             async function getLeagueTable() {
-                const response = await fetch("https://v3.football.api-sports.io/players/topscorers?league=140&season=2020", {
+                const response = await fetch(`https://v3.football.api-sports.io/players/topscorers?league=${mCTX[0]}&season=2020`, {
                     "method": "GET",
                     "headers": {
                         "x-rapidapi-host": "v3.football.api-sports.io",
@@ -32,11 +34,11 @@ const States = () => {
             }
 
 
-            if (!fetchedData) {
+            if (mCTX[0] !== null) {
                 getLeagueTable()
             }
         },
-        [fetchedData]
+        [mCTX[0]]
     )
 
     if (fetchedData === null) {

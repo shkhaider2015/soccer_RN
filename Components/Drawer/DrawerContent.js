@@ -1,11 +1,19 @@
 import React, { useContext } from 'react'
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { Avatar, Title, Caption, Paragraph, Drawer, Text, TouchableRipple, Switch } from "react-native-paper";
 // import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+
 import LALIGA_LOGO from "../../RawData/images/laliga.png";
 import BUNDESLIGA_LOGO from "../../RawData/images/bundes.png";
+import EPL_LOGO from "../../RawData/images/epl.png";
+import SERIEA_LOGO from "../../RawData/images/seriea.png";
+import CHAMPIONS_LEAGUE from "../../RawData/images/uefa_champions_league.png";
+import EUROPA_LEAGUE from "../../RawData/images/uefa_europa_league.png";
+import FOOTBALL_LOGO from "../../RawData/images/football.png";
+import DOWN_ARROW from "../../RawData/images/DownArrow.png";
+
 import LeagueIdContext from "../team/Context/mCTX";
 
 
@@ -61,60 +69,90 @@ const DrawerContent = (props) => {
                             onPress={() => { props.navigation.navigate('About') }}
                         />
                         <Drawer.Item
-                            icon={({ color, size }) => (<Icon name="bookmark-outline" color={color} size={size} />)}
-                            label="Bookmarks"
+                            // icon={({ color, size }) => (<Icon name="bookmark-outline" color={color} size={size} />)}
+                            icon={CHAMPIONS_LEAGUE}
+                            label="UEFA Champions League"
                             onPress={() => { }}
                         />
                         <Drawer.Item
-                            icon={({ color, size }) => (<Icon name="bookmark-outline" color={color} size={size} />)}
-                            label="LaLiga"
-                            // onPress={() => { props.navigation.navigate('Laliga') }}
+                            // icon={({ color, size }) => (<Icon name="bookmark-outline" color={color} size={size} />)}
+                            icon={EUROPA_LEAGUE}
+                            label="UEFA Europa Cup"
+                        // onPress={() => { props.navigation.navigate('Laliga') }}
                         />
-                        <Drawer.Item
+                        {/* <Drawer.Item
                             icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}
                             label="Major League"
                             onPress={() => toggleMenu()}
-                        />
+                        /> */}
+                        <Drawer.Section>
+                            <TouchableRipple onPress={() => toggleMenu()} >
+                                <View style={{ flexDirection: 'row', marginTop: 20 }} >
+                                    <View style={{ flex: 2 }} >
+                                        <Image
+                                            style={{ width: 20, height: 20, marginStart: 20 }}
+                                            source={FOOTBALL_LOGO}
+                                        />
+                                    </View>
+                                    <View style={{ flex: 4 }}  >
+                                        <Text >Major Leagues</Text>
+                                    </View>
+                                    <View pointerEvents="none" style={{ flex: 1 }} >
+                                        {
+                                            isMajorLeague
+                                                ? <Icon name="chevron-up" size={15} />
+                                                : <Icon name="chevron-down" size={15} />
+                                        }
+
+
+                                    </View>
+
+                                </View>
+                            </TouchableRipple>
+
+                        </Drawer.Section>
                         {
                             isMajorLeague
                                 ? <Drawer.Section>
                                     <Drawer.Item
-                                    style={{ marginStart: 30 }}
+                                        style={{ marginStart: 30 }}
                                         // icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}
                                         icon={LALIGA_LOGO}
                                         label="La Liga"
-                                        onPress={() => { 
+                                        onPress={() => {
                                             leaguemCTX[1](140)
-                                            return props.navigation.navigate('StackNavigator') 
-                                        } }
+                                            return props.navigation.navigate('StackNavigator')
+                                        }}
                                     />
                                     <Drawer.Item
-                                    style={{ marginStart: 30 }}
-                                        icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}
+                                        style={{ marginStart: 30 }}
+                                        // icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}
+                                        icon={EPL_LOGO}
                                         label="English Premier League"
                                         onPress={() => {
                                             leaguemCTX[1](39)
                                             return props.navigation.navigate('StackNavigator')
-                                        } }
+                                        }}
                                     />
                                     <Drawer.Item
-                                    style={{ marginStart: 30 }}
-                                        icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}
+                                        style={{ marginStart: 30 }}
+                                        // icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}
+                                        icon={SERIEA_LOGO}
                                         label="Serie A"
                                         onPress={() => {
                                             leaguemCTX[1](135)
                                             return props.navigation.navigate('StackNavigator')
-                                        } }
+                                        }}
                                     />
                                     <Drawer.Item
-                                    style={{ marginStart: 30 }}
+                                        style={{ marginStart: 30 }}
                                         // icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}
                                         icon={BUNDESLIGA_LOGO}
                                         label="Bundesliga"
                                         onPress={() => {
                                             leaguemCTX[1](78)
                                             return props.navigation.navigate('StackNavigator')
-                                        } }
+                                        }}
                                     />
                                 </Drawer.Section>
                                 : null

@@ -59,7 +59,7 @@ const Standings = () => {
                     data={fetchedData}
                     renderItem={({ item }) => <View>
                         <StandingHeader />
-                        <StandingTableUI fetchedData={item} />
+                        <StandingTableUI fetchedData={item} isGroup={true} />
                     </View>}
                     keyExtractor={(item, index) => index.toString()}
                 />
@@ -70,7 +70,7 @@ const Standings = () => {
         else {
             return <View>
                 <StandingHeader />
-                <StandingTableUI fetchedData={fetchedData} />
+                <StandingTableUI fetchedData={fetchedData} isGroup={true} />
             </View>
         }
     }

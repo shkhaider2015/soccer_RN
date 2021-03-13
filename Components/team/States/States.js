@@ -28,6 +28,7 @@ const States = () => {
                 else {
                     const data = await response.json()
                     const standings = await data['response']
+
                     setFetcheddata(standings)
                 }
 

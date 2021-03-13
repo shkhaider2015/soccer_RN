@@ -45,7 +45,7 @@ const Fixtures = () => {
             }
 
             if (mCTX[0] !== null) {
-                // getLeagueId()
+                getLeagueId()
 
             }
 

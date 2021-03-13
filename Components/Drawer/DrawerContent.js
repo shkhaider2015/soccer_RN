@@ -72,7 +72,10 @@ const DrawerContent = (props) => {
                             // icon={({ color, size }) => (<Icon name="bookmark-outline" color={color} size={size} />)}
                             icon={CHAMPIONS_LEAGUE}
                             label="UEFA Champions League"
-                            onPress={() => { }}
+                            onPress={() => { 
+                                leaguemCTX[1](2)
+                                return props.navigation.navigate('StackNavigator')
+                            }}
                         />
                         <Drawer.Item
                             // icon={({ color, size }) => (<Icon name="bookmark-outline" color={color} size={size} />)}

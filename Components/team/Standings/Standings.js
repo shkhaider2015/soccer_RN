@@ -1,8 +1,9 @@
-import React, {useState, useContext, useEffect} from 'react'
-import { Text } from 'react-native'
+import React, { useState, useContext, useEffect } from 'react'
+import { FlatList, Text, View } from 'react-native'
 import LeagueIdContext from '../Context/mCTX';
 import ProgressBar from 'react-native-progress/Bar'
 import { StandingTableUI } from './StandingTableUI';
+import { StandingHeader } from './StandingHeader';
 
 
 const Standings = () => {
@@ -27,16 +28,21 @@ const Standings = () => {
                 }
                 else {
                     const data = await response.json()
-                    const standings = await data['response'][0]['league']['standings'][0]
-                    
+                    var standings = null;
+                    if (mCTX[0] === 2) {
+                        standings = await data['response'][0]['league']['standings']
+                    }
+                    else {
+                        standings = await data['response'][0]['league']['standings'][0]
+                    }
+
                     setFetcheddata(standings)
                 }
 
             }
 
 
-            if(mCTX[0] !== null)
-            {
+            if (mCTX[0] !== null) {
                 getLeagueTable()
             }
         },
@@ -46,10 +52,28 @@ const Standings = () => {
     if (fetchedData === null) {
         return <ProgressBar size={30} indeterminate={true} />
     }
-    else
-    {
-        return <StandingTableUI fetchedData={fetchedData} />
+    else {
+        if (mCTX[0] === 2) {
+            return <View>
+                <FlatList
+                    data={fetchedData}
+                    renderItem={({ item }) => <View>
+                        <StandingHeader />
+                        <StandingTableUI fetchedData={item} />
+                    </View>}
+                    keyExtractor={(item, index) => index.toString()}
+                />
+
+
+            </View>
+        }
+        else {
+            return <View>
+                <StandingHeader />
+                <StandingTableUI fetchedData={fetchedData} />
+            </View>
+        }
     }
 }
 
-export {Standings}
+export { Standings }

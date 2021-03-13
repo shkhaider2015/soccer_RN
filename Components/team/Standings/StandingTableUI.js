@@ -63,7 +63,7 @@ const StandingTableUI = ({fetchedData}) => {
     // }
     // else {
         return <View style={{ backgroundColor: 'white' }} >
-            <View style={{
+            {/* <View style={{
                 flexDirection: 'row',
                 paddingTop: 5,
                 paddingBottom: 5,
@@ -86,7 +86,7 @@ const StandingTableUI = ({fetchedData}) => {
 
 
 
-            </View>
+            </View> */}
 
             
             <View style={{ marginBottom: 85, marginTop: 10 }} >

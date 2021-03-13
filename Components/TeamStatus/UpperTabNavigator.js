@@ -5,7 +5,8 @@ import { TeamStatus } from "./TeamStatus";
 import { Laliga } from "../laliga/laliga";
 import { About } from "../About";
 import { Fixtures } from "../team/Fixtures/Fixtures";
-import { StandingTableUI } from "../team/Standings/StandingTableUI";
+// import { StandingTableUI } from "../team/Standings/StandingTableUI";
+import { Standings } from "../team/Standings/Standings";
 import { States } from "../team/States/States";
 import { GetLeague } from "../Utility/UI";
 import LeagueCTX from "../team/Context/mCTX";
@@ -33,7 +34,7 @@ const  UpperTabNavigation = () => {
       
     >
         <Tab.Screen name="Laliga" component={Fixtures} options={{ tabBarLabel : "FIXTURES"}}  />
-      <Tab.Screen name="Standings" component={StandingTableUI} options={{ tabBarLabel : "STANDINGS"}} />
+      <Tab.Screen name="Standings" component={Standings} options={{ tabBarLabel : "STANDINGS"}} />
       <Tab.Screen name="States" component={States} options={{ tabBarLabel : "STATES"}} />
     </Tab.Navigator>
   );

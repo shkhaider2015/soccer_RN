@@ -11,57 +11,57 @@ import LeagueIdContext from '../Context/mCTX';
 const data = ['MP', 'W', 'D', 'L', 'GD', 'Pts']
 
 
-const StandingTableUI = () => {
+const StandingTableUI = ({fetchedData}) => {
 
-    const [fetchedData, setFetcheddata] = useState(null)
-    const mCTX = useContext(LeagueIdContext)
+    // const [fetchedData, setFetcheddata] = useState(null)
+    // const mCTX = useContext(LeagueIdContext)
 
-    console.log("Standings -------------------> mCTX ", mCTX)
-    useEffect(
-        () => {
-            async function getLeagueTable() {
-                const response = await fetch(`https://v3.football.api-sports.io/standings?league=${mCTX[0]}&season=2020`, {
-                    "method": "GET",
-                    "headers": {
-                        "x-rapidapi-host": "v3.football.api-sports.io",
-                        "x-rapidapi-key": "bb282edd25b616a90605f35b51ceb83d"
-                    }
-                })
+    // console.log("Standings -------------------> mCTX ", mCTX)
+    // useEffect(
+    //     () => {
+    //         async function getLeagueTable() {
+    //             const response = await fetch(`https://v3.football.api-sports.io/standings?league=${mCTX[0]}&season=2020`, {
+    //                 "method": "GET",
+    //                 "headers": {
+    //                     "x-rapidapi-host": "v3.football.api-sports.io",
+    //                     "x-rapidapi-key": "bb282edd25b616a90605f35b51ceb83d"
+    //                 }
+    //             })
 
-                if (!response.ok) {
-                    console.log("Network Error")
-                    throw Error(response.statusText);
-                }
-                else {
-                    const data = await response.json()
-                    const standings = await data['response'][0]['league']['standings'][0]
-                    // var i = 0
-                    // console.log("Standing Data : ", standings)
-                    // await standings.map(
-                    //     (item, index) => {
-                    //         i++
-                    //         console.log(i + " kkkk --> ", item.team.logo)
-                    //     }
-                    // )
-                    setFetcheddata(standings)
-                }
+    //             if (!response.ok) {
+    //                 console.log("Network Error")
+    //                 throw Error(response.statusText);
+    //             }
+    //             else {
+    //                 const data = await response.json()
+    //                 const standings = await data['response'][0]['league']['standings'][0]
+    //                 // var i = 0
+    //                 // console.log("Standing Data : ", standings)
+    //                 // await standings.map(
+    //                 //     (item, index) => {
+    //                 //         i++
+    //                 //         console.log(i + " kkkk --> ", item.team.logo)
+    //                 //     }
+    //                 // )
+    //                 setFetcheddata(standings)
+    //             }
 
-            }
-
-
-            if(mCTX[0] !== null)
-            {
-                getLeagueTable()
-            }
-        },
-        [mCTX[0]]
-    )
+    //         }
 
 
-    if (fetchedData === null) {
-        return <ProgressBar size={30} indeterminate={true} />
-    }
-    else {
+    //         if(mCTX[0] !== null)
+    //         {
+    //             getLeagueTable()
+    //         }
+    //     },
+    //     [mCTX[0]]
+    // )
+
+
+    // if (fetchedData === null) {
+    //     return <ProgressBar size={30} indeterminate={true} />
+    // }
+    // else {
         return <View style={{ backgroundColor: 'white' }} >
             <View style={{
                 flexDirection: 'row',
@@ -100,7 +100,7 @@ const StandingTableUI = () => {
 
 
         </View>
-    }
+    // }
 
 
 

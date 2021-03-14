@@ -16,6 +16,30 @@ const Fixtures = () => {
 
     console.log("jksfjksdjfkjdks : ", mCTX[0])
 
+    const filterForSections = (arr) => {
+        var ee = arr.map(
+            (item, index) => item.occo
+        )
+
+        var unique = [...new Set(ee)]
+
+        var hh = {}
+
+        unique.map(
+            (item1, index1) => {
+                hh[item1] = arr.filter(
+                    (item2, index2) => {
+                        if (item2.occo === item1) {
+                            return item2
+                        }
+                    }
+                )
+            }
+        )
+
+        console.log("hh : ", hh)
+    }
+
     useEffect(
         () => {
 
@@ -38,7 +62,7 @@ const Fixtures = () => {
                 else {
                     const data = await response.json()
                     const data2 = await bubbleSortByTime(data['response'])
-                    
+
                     setFetcheddata(data2)
 
                 }
@@ -57,21 +81,36 @@ const Fixtures = () => {
         () => {
             console.log("UseEfeect()  2")
 
-            
-                if (fetchedData.length !== 0) {
-                    console.log("Fetch data length is not zero", fetchedData.length)
-                    for (let i = 0; i < fetchedData.length; i++) {
-                        const element = fetchedData[i];
-                        
-                        if (element.fixture.status.short === "NS") {
-                            console.log("Found NS", )
-                            setScrollIndex(i)
-                            break
-                        }
+            if (fetchedData.length !== 0 && mCTX[0] === 2) {
 
+            }
+            else if (fetchedData.length !== 0) {
+                console.log("Fetch data length is not zero", fetchedData.length)
+                for (let i = 0; i < fetchedData.length; i++) {
+                    const element = fetchedData[i];
+
+                    if (element.fixture.status.short === "NS") {
+                        console.log("Found NS",)
+                        setScrollIndex(i)
+                        break
                     }
+
                 }
-            
+            }
+            // if (fetchedData.length !== 0) {
+            //     console.log("Fetch data length is not zero", fetchedData.length)
+            //     for (let i = 0; i < fetchedData.length; i++) {
+            //         const element = fetchedData[i];
+
+            //         if (element.fixture.status.short === "NS") {
+            //             console.log("Found NS", )
+            //             setScrollIndex(i)
+            //             break
+            //         }
+
+            //     }
+            // }
+
         },
         [fetchedData]
     )

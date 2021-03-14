@@ -12,32 +12,44 @@ const Fixtures = () => {
     const mCTX = useContext(LeagueIdContext)
     const select = useSelector(state => state)
     const [fetchedData, setFetcheddata] = useState([])
-    const [scrollIndex, setScrollIndex] = useState(0)
+    const [filteredData, setFiltereddata] = useState([])
+    const [scrollIndex, setScrollIndex] = useState(null)
 
     console.log("jksfjksdjfkjdks : ", mCTX[0])
 
     const filterForSections = (arr) => {
-        var ee = arr.map(
-            (item, index) => item.occo
+        var keys = arr.map(
+            (item, index) => item.league.round
         )
 
-        var unique = [...new Set(ee)]
+        var uniqueKeys = [...new Set(keys)]
 
-        var hh = {}
+        var filterData = []
 
-        unique.map(
+        uniqueKeys.map(
             (item1, index1) => {
-                hh[item1] = arr.filter(
-                    (item2, index2) => {
-                        if (item2.occo === item1) {
+                var ff = {
+                    title: item1,
+                    data: arr.filter((item2, index) => {
+                        if (item2.league.round === item1) {
                             return item2
                         }
-                    }
-                )
+                    })
+                }
+                filterData.push(ff)
+                // filterData['title'] = item1
+                // filterData['data'] = arr.filter(
+                //     (item2, index2) => {
+                //         if (item2.league.round === item1) {
+                //             return item2
+                //         }
+                //     }
+                // )
             }
         )
 
-        console.log("hh : ", hh)
+        // console.log("FilterData : ", filterData)
+        setFiltereddata(filterData)
     }
 
     useEffect(
@@ -63,7 +75,9 @@ const Fixtures = () => {
                     const data = await response.json()
                     const data2 = await bubbleSortByTime(data['response'])
 
-                    setFetcheddata(data2)
+                    filterForSections(data2)
+                    setScrollIndex(null)
+                    // setFetcheddata(data2)
 
                 }
             }
@@ -79,24 +93,24 @@ const Fixtures = () => {
 
     useEffect(
         () => {
-            console.log("UseEfeect()  2")
+            console.log("UseEfeect()  2 and mCTX[0]   :  ", mCTX[0])
 
-            if (fetchedData.length !== 0 && mCTX[0] === 2) {
+            // if (fetchedData.length !== 0 && mCTX[0] === 2) {
 
-            }
-            else if (fetchedData.length !== 0) {
-                console.log("Fetch data length is not zero", fetchedData.length)
-                for (let i = 0; i < fetchedData.length; i++) {
-                    const element = fetchedData[i];
+            // }
+            // else if (fetchedData.length !== 0) {
+            //     console.log("Fetch data length is not zero", fetchedData.length)
+            //     for (let i = 0; i < fetchedData.length; i++) {
+            //         const element = fetchedData[i];
 
-                    if (element.fixture.status.short === "NS") {
-                        console.log("Found NS",)
-                        setScrollIndex(i)
-                        break
-                    }
+            //         if (element.fixture.status.short === "NS") {
+            //             console.log("Found NS",)
+            //             setScrollIndex(i)
+            //             break
+            //         }
 
-                }
-            }
+            //     }
+            // }
             // if (fetchedData.length !== 0) {
             //     console.log("Fetch data length is not zero", fetchedData.length)
             //     for (let i = 0; i < fetchedData.length; i++) {
@@ -110,19 +124,100 @@ const Fixtures = () => {
 
             //     }
             // }
+            if (filteredData.length !== 0) {
+                // for(var key in filteredData)
+                // {
+                //     console.log("key : ", key)
+                //     for (let i = 0; i < filteredData[key].length; i++) {
+                //         const element = filteredData[key][i];
+
+                //         if(element.fixture.status.short === "NS")
+                //         {
+                //             console.log("Found NS")
+                //             setScrollIndex({
+                //                 title: key,
+                //                 index: i
+                //             })
+                //             break;
+                //         }
+
+                //     }
+
+                // }
+
+                // filteredData.map(
+                //     (item, index) => {
+                //         for (let i = 0; i < item.data.length; i++) {
+                //             const element = item.data[i];
+
+                //             if (element.fixture.status.short === "NS") {
+                //                 console.log("Found NS")
+                //                 setScrollIndex({
+                //                     title: key,
+                //                     index: i
+                //                 })
+                //                 break;
+                //             }
+
+
+                //         }
+                //     }
+                // )
+
+                var isFound = false;
+                if(mCTX[0] !== 2)
+                {
+                    for (let i = 0; i < filteredData.length; i++) {
+                        const element1 = filteredData[i].data;
+                        if(isFound)
+                        {
+                            break
+                        }
+    
+                        for (let j = 0; j < element1.length; j++) {
+                            const element2 = element1[j];
+    
+                            if(isFound)
+                            {
+                                break
+                            }
+                            if (element2.fixture.status.short === "NS") {
+                                console.log("Found NS")
+                                setScrollIndex({
+                                    titleIndex: i,
+                                    dataIndex: j
+                                })
+                                isFound = true
+                            }
+    
+                        }
+    
+                        
+                    }
+                }
+                else
+                {
+                    setScrollIndex({
+                        titleIndex: filteredData.length -1 ,
+                        dataIndex: filteredData[filteredData.length - 1].data.length - 1
+                    })
+                }
+
+            }
 
         },
-        [fetchedData]
+        [filteredData]
     )
 
 
     return <View>
         {console.log("ScrollIndex : ", scrollIndex)}
+        {console.log("Data : ", filteredData[1]['data'])}
 
         {
             scrollIndex === 0
                 ? <Text>Loading ...</Text>
-                : <FixtureListUI scrollIndex={scrollIndex} data={fetchedData} />
+                : <FixtureListUI scrollIndex={scrollIndex} data={filteredData} />
         }
 
 

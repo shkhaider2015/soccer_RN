@@ -39,7 +39,7 @@ const StandingRowUI = ({ data }) => {
                         alignSelf: 'center'
 
                     }}
-                    source={{ uri: data['team']['logo'] }}
+                    source={{ uri: data['team']['logo'] ? data['team']['logo'] : "" }}
                 />
                 <Text style={{ flex: 8, textAlign: 'center', alignSelf: 'center' }} >{data['team']['name']}</Text>
             </View>

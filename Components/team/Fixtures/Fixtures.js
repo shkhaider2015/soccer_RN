@@ -176,12 +176,15 @@ const Fixtures = () => {
     
                         for (let j = 0; j < element1.length; j++) {
                             const element2 = element1[j];
+                            const matchDate = new Date(element2.fixture.date);
+                            const today = new Date();
+                            const tempElement2 = element1[j+1]
     
                             if(isFound)
                             {
                                 break
                             }
-                            if (element2.fixture.status.short === "NS") {
+                            if (element2.fixture.status.short === "NS" && tempElement2?.fixture.status.short === "NS") {
                                 console.log("Found NS")
                                 setScrollIndex({
                                     titleIndex: i,
@@ -212,10 +215,10 @@ const Fixtures = () => {
 
     return <View>
         {console.log("ScrollIndex : ", scrollIndex)}
-        {console.log("Data : ", filteredData[1]['data'])}
+        {/* {console.log("Data : ", filteredData[1]['data'])} */}
 
         {
-            scrollIndex === 0
+            scrollIndex === null
                 ? <Text>Loading ...</Text>
                 : <FixtureListUI scrollIndex={scrollIndex} data={filteredData} />
         }

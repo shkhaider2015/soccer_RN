@@ -14,7 +14,7 @@ const FixtureListUI = ({ scrollIndex, data }) => {
         getItemHeight: (rowData, sectionIndex, rowIndex) => sectionIndex === 0 ? 100 : 50,
   
         // These three properties are optional
-        // getSeparatorHeight: () => 40, // 1 / PixelRatio.get(), // The height of your separators
+        getSeparatorHeight: () => 10, // 1 / PixelRatio.get(), // The height of your separators
         getSectionHeaderHeight: () => 20, // The height of your section headers
         // getSectionFooterHeight: () => 10, // The height of your section footers
         //jkkjkjkjkjkjk
@@ -34,14 +34,14 @@ const FixtureListUI = ({ scrollIndex, data }) => {
                 //     })
                 // }
 
-                // if (refSectionList.current) {
-                //     refSectionList.current.scrollToLocation({
-                //         animated: true,
-                //         sectionIndex: scrollIndex.titleIndex,
-                //         itemIndex: scrollIndex.dataIndex,
-                //         // viewOffset: 20 // height of section header
-                //     })
-                // }
+                if (refSectionList.current) {
+                    refSectionList.current.scrollToLocation({
+                        // animated: false,
+                        sectionIndex: 21,
+                        itemIndex: 2,
+                        // viewOffset: 20 // height of section header
+                    })
+                }
 
 
             }, 500);

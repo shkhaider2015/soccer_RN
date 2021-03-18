@@ -220,7 +220,7 @@ const Fixtures = () => {
         {
             scrollIndex === null
                 ? <Text>Loading ...</Text>
-                : <FixtureListUI scrollIndex={scrollIndex} data={filteredData} />
+                : <FixtureListUI scrollIndex={scrollIndex} data={filteredData} isGroup={} />
         }
 
 

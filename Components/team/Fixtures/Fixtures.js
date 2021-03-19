@@ -75,9 +75,9 @@ const Fixtures = () => {
                     const data = await response.json()
                     const data2 = await bubbleSortByTime(data['response'])
 
-                    filterForSections(data2)
+                    // filterForSections(data2)
                     setScrollIndex(null)
-                    // setFetcheddata(data2)
+                    setFetcheddata(data2)
 
                 }
             }
@@ -111,19 +111,19 @@ const Fixtures = () => {
 
             //     }
             // }
-            // if (fetchedData.length !== 0) {
-            //     console.log("Fetch data length is not zero", fetchedData.length)
-            //     for (let i = 0; i < fetchedData.length; i++) {
-            //         const element = fetchedData[i];
+            if (fetchedData.length !== 0) {
+                console.log("Fetch data length is not zero", fetchedData.length)
+                for (let i = 0; i < fetchedData.length; i++) {
+                    const element = fetchedData[i];
 
-            //         if (element.fixture.status.short === "NS") {
-            //             console.log("Found NS", )
-            //             setScrollIndex(i)
-            //             break
-            //         }
+                    if (element.fixture.status.short === "NS") {
+                        console.log("Found NS", )
+                        setScrollIndex(i)
+                        break
+                    }
 
-            //     }
-            // }
+                }
+            }
             if (filteredData.length !== 0) {
                 // for(var key in filteredData)
                 // {
@@ -164,47 +164,47 @@ const Fixtures = () => {
                 //     }
                 // )
 
-                var isFound = false;
-                if(mCTX[0] !== 2)
-                {
-                    for (let i = 0; i < filteredData.length; i++) {
-                        const element1 = filteredData[i].data;
-                        if(isFound)
-                        {
-                            break
-                        }
+                // var isFound = false;
+            //     if(mCTX[0] !== 2)
+            //     {
+            //         for (let i = 0; i < filteredData.length; i++) {
+            //             const element1 = filteredData[i].data;
+            //             if(isFound)
+            //             {
+            //                 break
+            //             }
     
-                        for (let j = 0; j < element1.length; j++) {
-                            const element2 = element1[j];
-                            const matchDate = new Date(element2.fixture.date);
-                            const today = new Date();
-                            const tempElement2 = element1[j+1]
+            //             for (let j = 0; j < element1.length; j++) {
+            //                 const element2 = element1[j];
+            //                 const matchDate = new Date(element2.fixture.date);
+            //                 const today = new Date();
+            //                 const tempElement2 = element1[j+1]
     
-                            if(isFound)
-                            {
-                                break
-                            }
-                            if (element2.fixture.status.short === "NS" && tempElement2?.fixture.status.short === "NS") {
-                                console.log("Found NS")
-                                setScrollIndex({
-                                    titleIndex: i,
-                                    dataIndex: j
-                                })
-                                isFound = true
-                            }
+            //                 if(isFound)
+            //                 {
+            //                     break
+            //                 }
+            //                 if (element2.fixture.status.short === "NS" && tempElement2?.fixture.status.short === "NS") {
+            //                     console.log("Found NS")
+            //                     setScrollIndex({
+            //                         titleIndex: i,
+            //                         dataIndex: j
+            //                     })
+            //                     isFound = true
+            //                 }
     
-                        }
+            //             }
     
                         
-                    }
-                }
-                else
-                {
-                    setScrollIndex({
-                        titleIndex: filteredData.length -1 ,
-                        dataIndex: filteredData[filteredData.length - 1].data.length - 1
-                    })
-                }
+            //         }
+            //     }
+            //     else
+            //     {
+            //         setScrollIndex({
+            //             titleIndex: filteredData.length -1 ,
+            //             dataIndex: filteredData[filteredData.length - 1].data.length - 1
+            //         })
+            //     }
 
             }
 

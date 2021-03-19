@@ -9,39 +9,39 @@ const FixtureListUI = ({ scrollIndex, data }) => {
     const refFlatList = React.useRef(null)
     const refSectionList = React.useRef(null)
 
-    const itemLayout = sectionListGetItemLayout({
-        // The height of the row with rowData at the given sectionIndex and rowIndex
-        getItemHeight: (rowData, sectionIndex, rowIndex) => sectionIndex === 0 ? 100 : 50,
+    // const itemLayout = sectionListGetItemLayout({
+    //     // The height of the row with rowData at the given sectionIndex and rowIndex
+    //     getItemHeight: (rowData, sectionIndex, rowIndex) => sectionIndex === 0 ? 100 : 50,
   
-        // These three properties are optional
-        getSeparatorHeight: () => 10, // 1 / PixelRatio.get(), // The height of your separators
-        getSectionHeaderHeight: () => 20, // The height of your section headers
-        // getSectionFooterHeight: () => 10, // The height of your section footers
-        //jkkjkjkjkjkjk
-        //kjkjjkkjkj
-        //jjjh
-      })
+    //     // These three properties are optional
+    //     getSeparatorHeight: () => 10, // 1 / PixelRatio.get(), // The height of your separators
+    //     getSectionHeaderHeight: () => 20, // The height of your section headers
+    //     // getSectionFooterHeight: () => 10, // The height of your section footers
+    //     //jkkjkjkjkjkjk
+    //     //kjkjjkkjkj
+    //     //jjjh
+    //   })
 
    
 
     React.useEffect(
         () => {
             setTimeout(() => {
-                // if (refFlatList.current) {
-                //     refFlatList.current.scrollToIndex({
-                //         animated: true,
-                //         index: scrollIndex
-                //     })
-                // }
-
-                if (refSectionList.current) {
-                    refSectionList.current.scrollToLocation({
-                        // animated: false,
-                        sectionIndex: 21,
-                        itemIndex: 2,
-                        // viewOffset: 20 // height of section header
+                if (refFlatList.current) {
+                    refFlatList.current.scrollToIndex({
+                        animated: true,
+                        index: scrollIndex
                     })
                 }
+
+                // if (refSectionList.current) {
+                //     refSectionList.current.scrollToLocation({
+                //         // animated: false,
+                //         sectionIndex: 21,
+                //         itemIndex: 2,
+                //         // viewOffset: 20 // height of section header
+                //     })
+                // }
 
 
             }, 500);
@@ -53,7 +53,7 @@ const FixtureListUI = ({ scrollIndex, data }) => {
 
     return <View style={{ paddingBottom: 0 }} >
 
-        {/* <FlatList
+        <FlatList
             ref={refFlatList}
             data={data}
             renderItem={renderItem}
@@ -71,9 +71,9 @@ const FixtureListUI = ({ scrollIndex, data }) => {
                     refFlatList?.current?.scrollToIndex({ index: info.index, animated: false });
                 })
             }}
-        /> */}
+        />
 
-        <SectionList
+        {/* <SectionList
             ref={refSectionList}
             sections={data}
             keyExtractor={(item, index) => item + index}
@@ -92,7 +92,7 @@ const FixtureListUI = ({ scrollIndex, data }) => {
             //     return jj
             // }}
             getItemLayout={itemLayout}
-        />
+        /> */}
 
 
 

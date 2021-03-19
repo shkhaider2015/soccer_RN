@@ -9,12 +9,14 @@ const FixtureUI = ({ item }) => {
 
         <View 
          style={{
+             flexDirection: 'row',
              alignItems : 'flex-start',
              marginStart: 50,
              marginBottom: 15
          }}
          >
-        <Text style={{ opacity : 0.5 }} > {
+             <Text style={{ opacity : 0.5, fontSize : 10 }} >Day {item.league.round.slice(-2)} | </Text>
+        <Text style={{ opacity : 0.5, fontSize : 10 }} > {
         getDateFromMillis(item.fixture.timestamp, item.fixture.status.short) 
         } </Text>
         </View>

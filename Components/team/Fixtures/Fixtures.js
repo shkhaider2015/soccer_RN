@@ -56,10 +56,7 @@ const Fixtures = () => {
         () => {
 
             async function getLeagueId() {
-                // dispatch(
-                //     fetchFixturesBegin()
-                // )
-
+                
                 const response = await fetch(`https://v3.football.api-sports.io/fixtures?league=${mCTX[0]}&season=2020`, {
                     "method": "GET",
                     "headers": {
@@ -76,7 +73,7 @@ const Fixtures = () => {
                     const data2 = await bubbleSortByTime(data['response'])
 
                     // filterForSections(data2)
-                    setScrollIndex(null)
+                    // setScrollIndex(null)
                     setFetcheddata(data2)
 
                 }
@@ -122,6 +119,11 @@ const Fixtures = () => {
                         break
                     }
 
+                }
+
+                if(!scrollIndex)
+                {
+                    setScrollIndex(fetchedData.length - 1)
                 }
             }
             if (filteredData.length !== 0) {
@@ -209,7 +211,7 @@ const Fixtures = () => {
             }
 
         },
-        [filteredData]
+        [fetchedData]
     )
 
 
@@ -220,7 +222,7 @@ const Fixtures = () => {
         {
             scrollIndex === null
                 ? <Text>Loading ...</Text>
-                : <FixtureListUI scrollIndex={scrollIndex} data={filteredData} isGroup={} />
+                : <FixtureListUI scrollIndex={scrollIndex} data={fetchedData} />
         }
 
 

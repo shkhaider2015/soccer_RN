@@ -1,6 +1,7 @@
 
 export const getDateFromMillis = (milis, status) => {
     var date = new Date(milis * 1000)
+    var today = new Date();
 
     var hours = date.getHours();
     var minutes = date.getMinutes();
@@ -9,9 +10,40 @@ export const getDateFromMillis = (milis, status) => {
     hours = hours ? hours : 12; // the hour '0' should be '12'
     minutes = minutes < 10 ? '0' + minutes : minutes;
     var strTime = hours + ':' + minutes + ' ' + ampm;
+    var ddd = null
 
+    if(date.getFullYear() === today.getFullYear())
+    {
+        if(date.getMonth() === today.getMonth())
+        {
+            if(date.getDate() === today.getDate())
+            {
+                ddd = "Today"
+            }
+            else if(date.getDate() + 1 === today.getDate())
+            {
+                ddd = "Yesterday"
+            }
+            else if(date.getDate() - 1 === today.getDate())
+            {
+                ddd = "Tomorrow"
+            }
+            else
+            {
+                ddd = null
+            }
+        }
+    }
+var showDate = null;
+    if(ddd)
+    {
+        showDate = ddd + " - "
+    }
+    else
+    {
+        showDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} - `;
+    }
 
-    var dd = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} - `;
     var time = `${strTime}`
     if(status === "TBD")
     {
@@ -21,8 +53,9 @@ export const getDateFromMillis = (milis, status) => {
     {
         time = `FT`
     }
+    
 
-    return dd+time;
+    return showDate+time;
 }
 
 export const hoursDifference = (prevTimestamp, nextTimestamp) =>

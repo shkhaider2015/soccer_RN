@@ -43,7 +43,7 @@ const Standings = () => {
 
 
             if (mCTX[0] !== null) {
-                getLeagueTable()
+                // getLeagueTable()
             }
         },
         [mCTX[0]]

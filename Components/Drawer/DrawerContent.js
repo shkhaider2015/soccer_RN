@@ -78,7 +78,7 @@ const DrawerContent = (props) => {
                                     title: "UEFA CHAMPION LEAGUE",
                                     logo: CHAMPIONS_LEAGUE,
                                     isGroup: true,
-                                    color: "#122c54"
+                                    color: "#455673"
                                 })
                                 return props.navigation.navigate('StackNavigator')
                             }}
@@ -87,7 +87,16 @@ const DrawerContent = (props) => {
                             // icon={({ color, size }) => (<Icon name="bookmark-outline" color={color} size={size} />)}
                             icon={EUROPA_LEAGUE}
                             label="UEFA Europa Cup"
-                        // onPress={() => { props.navigation.navigate('Laliga') }}
+                        onPress={() => { 
+                            leaguemCTX[1]({
+                                id : 3,
+                                title: "EUROPA LEAGUE",
+                                logo: EUROPA_LEAGUE,
+                                isGroup: true,
+                                color: "#122c54"
+                            })
+                            return props.navigation.navigate('StackNavigator') 
+                        }}
                         />
                         {/* <Drawer.Item
                             icon={({ color, size }) => (<Icon name="account-check-outline" color={color} size={size} />)}

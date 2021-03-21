@@ -26,7 +26,7 @@ const  UpperTabNavigation = () => {
           fontSize: 14 
         },
         style: { 
-          backgroundColor: mCTX[0] !== null ? GetLeague(mCTX[0]).color : ""
+          backgroundColor: mCTX[0] !== null ? mCTX[0].color : ""
         },
         
       }}

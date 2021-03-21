@@ -73,7 +73,13 @@ const DrawerContent = (props) => {
                             icon={CHAMPIONS_LEAGUE}
                             label="UEFA Champions League"
                             onPress={() => { 
-                                leaguemCTX[1](2)
+                                leaguemCTX[1]({
+                                    id : 2,
+                                    title: "UEFA CHAMPION LEAGUE",
+                                    logo: CHAMPIONS_LEAGUE,
+                                    isGroup: true,
+                                    color: "#122c54"
+                                })
                                 return props.navigation.navigate('StackNavigator')
                             }}
                         />
@@ -123,7 +129,13 @@ const DrawerContent = (props) => {
                                         icon={LALIGA_LOGO}
                                         label="La Liga"
                                         onPress={() => {
-                                            leaguemCTX[1](140)
+                                            leaguemCTX[1]({
+                                                id : 140,
+                                                title: "LA LIGA",
+                                                logo: LALIGA_LOGO,
+                                                isGroup: false,
+                                                color: "#1a4078"
+                                            })
                                             return props.navigation.navigate('StackNavigator')
                                         }}
                                     />
@@ -133,7 +145,13 @@ const DrawerContent = (props) => {
                                         icon={EPL_LOGO}
                                         label="English Premier League"
                                         onPress={() => {
-                                            leaguemCTX[1](39)
+                                            leaguemCTX[1]({
+                                                id : 30,
+                                                title: "ENGLISH PREMIER LEAGUE",
+                                                logo: EPL_LOGO,
+                                                isGroup: false,
+                                                color: "#3d145e"
+                                            })
                                             return props.navigation.navigate('StackNavigator')
                                         }}
                                     />
@@ -143,7 +161,13 @@ const DrawerContent = (props) => {
                                         icon={SERIEA_LOGO}
                                         label="Serie A"
                                         onPress={() => {
-                                            leaguemCTX[1](135)
+                                            leaguemCTX[1]({
+                                                id : 135,
+                                                title: "SERIE A",
+                                                logo: SERIEA_LOGO,
+                                                isGroup: false,
+                                                color: "#122c54"
+                                            })
                                             return props.navigation.navigate('StackNavigator')
                                         }}
                                     />
@@ -153,7 +177,13 @@ const DrawerContent = (props) => {
                                         icon={BUNDESLIGA_LOGO}
                                         label="Bundesliga"
                                         onPress={() => {
-                                            leaguemCTX[1](78)
+                                            leaguemCTX[1]({
+                                                id : 78,
+                                                title: "BUNDESLIGA",
+                                                logo: BUNDESLIGA_LOGO,
+                                                isGroup: false,
+                                                color: "#a12525"
+                                            })
                                             return props.navigation.navigate('StackNavigator')
                                         }}
                                     />

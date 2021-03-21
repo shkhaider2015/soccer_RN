@@ -13,7 +13,7 @@ const States = () => {
     useEffect(
         () => {
             async function getLeagueTable() {
-                const response = await fetch(`https://v3.football.api-sports.io/players/topscorers?league=${mCTX[0]}&season=2020`, {
+                const response = await fetch(`https://v3.football.api-sports.io/players/topscorers?league=${mCTX[0].id}&season=2020`, {
                     "method": "GET",
                     "headers": {
                         "x-rapidapi-host": "v3.football.api-sports.io",

@@ -24,7 +24,7 @@ const StatesUI = ({ data }) => {
             </View>
         </View>
 
-        <Text style={{ flex: 1, textAlign: 'center', alignSelf: 'center' }} >{data.statistics[0].goals.assists}</Text>
+        <Text style={{ flex: 1, textAlign: 'center', alignSelf: 'center' }} >{data.statistics[0].goals.assists ? data.statistics[0].goals.assists : 0 }</Text>
         <Text style={{ flex: 1, textAlign: 'center', alignSelf: 'center', fontWeight: 'bold' }} >{data.statistics[0].goals.total}</Text>
 
     </View>

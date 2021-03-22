@@ -34,7 +34,7 @@ const  UpperTabNavigation = () => {
       
     >
         <Tab.Screen name="Laliga" component={Fixtures} options={{ tabBarLabel : "FIXTURES"}}  />
-      <Tab.Screen name="Standings" component={Standings} options={{ tabBarLabel : "STANDINGS"}} />
+      <Tab.Screen name="Standings" component={Standings} options={{ tabBarLabel : mCTX[0].isGroup ? "Groups" : "STANDINGS"}} />
       <Tab.Screen name="States" component={States} options={{ tabBarLabel : "STATES"}} />
     </Tab.Navigator>
   );

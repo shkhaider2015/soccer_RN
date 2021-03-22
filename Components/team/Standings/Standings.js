@@ -29,7 +29,7 @@ const Standings = () => {
                 else {
                     const data = await response.json()
                     var standings = null;
-                    if (mCTX[0] === 2) {
+                    if (mCTX[0].isGroup) {
                         standings = await data['response'][0]['league']['standings']
                     }
                     else {
@@ -43,7 +43,7 @@ const Standings = () => {
 
 
             if (mCTX[0] !== null) {
-                // getLeagueTable()
+                getLeagueTable()
             }
         },
         [mCTX[0]]
@@ -53,13 +53,13 @@ const Standings = () => {
         return <ProgressBar size={30} indeterminate={true} />
     }
     else {
-        if (mCTX[0] === 2) {
+        if (mCTX[0].isGroup) {
             return <View>
                 <FlatList
                     data={fetchedData}
                     renderItem={({ item }) => <View>
                         <StandingHeader />
-                        <StandingTableUI fetchedData={item} isGroup={true} />
+                        <StandingTableUI fetchedData={item} isGroup={mCTX[0].isGroup} />
                     </View>}
                     keyExtractor={(item, index) => index.toString()}
                 />

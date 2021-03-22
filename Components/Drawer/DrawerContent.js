@@ -61,7 +61,7 @@ const DrawerContent = (props) => {
                         <Drawer.Item
                             icon={({ color, size }) => (<Icon name="home-outline" color={color} size={size} />)}
                             label="Home"
-                            onPress={() => { props.navigation.navigate('StackNavigator') }}
+                            onPress={() => { props.navigation.navigate('Upcoming Fixtures') }}
                         />
                         <Drawer.Item
                             icon={({ color, size }) => (<Icon name="account-outline" color={color} size={size} />)}

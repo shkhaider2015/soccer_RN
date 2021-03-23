@@ -93,3 +93,20 @@ export const todaysDate = (givendate, currentDate) =>
     return result
 
 }
+
+export const dateForApi = () => {
+    var year = new Date().getFullYear();
+    var month = new Date().getMonth() + 1;
+    var date = new Date().getDate();
+
+    if(month < 10)
+    {
+        month = `0${month}`
+    }
+    if(date < 10)
+    {
+        date = `0${date}`
+    }
+
+    return `${year}-${month}-21`
+}

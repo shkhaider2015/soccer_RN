@@ -71,6 +71,9 @@ const matchTime = (prevTime, currTime) =>
     {
         returnValue = false
     }
+
+    console.log("returnValue : ", returnValue)
+    return returnValue
 }
 
 const storeData = async (value) => {
@@ -92,8 +95,9 @@ const getData = async () => {
       // error reading value
       console.log("Error while reading data : ", e)
     }
-  }
+}
   
+  var isCall = true;
 
 export const TodaysFixture = () =>
 {
@@ -128,23 +132,35 @@ export const TodaysFixture = () =>
 
             if (!myData.length) {
                 console.log("data length is zero")
-                var isCall = true;
+                
                 getData()
                 .then(res => {
-                    console.log("Response : ", res)
                     if(res)
                     {
-                        if(matchTime(res.lastCall, new Date().getTime() ) )
+                        console.log("Response Time : ", res.isCall)
+                        if(!matchTime(res.lastCall, new Date().getTime() ) )
                         {
                             isCall = false;
+                            console.log("API Call  -------------> ")
+                            getLeagueId()
                         }
+                        else
+                        {
+                            console.log("Time Matched !!")
+                        }
+                    }
+                    else
+                    {
+                        console.log("API Call  -------------> ")
+                        getLeagueId()
                     }
                 })
                 .catch(err => console.log("Error accour in catch"))
 
                 if(isCall)
                 {
-                    getLeagueId()
+                    // console.log("API Call  -------------> ")
+                    // getLeagueId()
                 }
             }
         },
@@ -196,10 +212,16 @@ export const TodaysFixture = () =>
 
                 setIsLoading(!isLoading)
 
+                var millis = new Date().getTime();
+                storeData({
+                    lastCall: millis,
+                    data: fetchData
+                })
+
                 
             }
             else {
-                console.log("My Data length ", myData.length)
+                console.log("Arra is empty -> My Data length ", myData.length)
             }
         },
         [myData]
@@ -207,13 +229,17 @@ export const TodaysFixture = () =>
 
     
 
-    if(!isLoading)
-    {
-        var millis = new Date().getTime();
-        storeData({
-            lastCall: millis,
-            data: myData
-        })
+    // if(!isLoading)
+    // {
+    //     var millis = new Date().getTime();
 
-    }
+    //     if(isCall)
+    //     {
+    //         storeData({
+    //             lastCall: millis,
+    //             data: myData
+    //         })
+    //     }
+
+    // }
 }

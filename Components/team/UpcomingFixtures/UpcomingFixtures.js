@@ -14,6 +14,9 @@ import { dateForApi } from '../../Utility/TimeUtils';
 import { MemodFixtureUI } from '../Fixtures/fixtureUI';
 
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 const renderItem = ({ item }) => <MemodFixtureUI item={item} />
 
 const ff = ({ item }) => item.data.length
@@ -80,93 +83,116 @@ export const UpcomingFixtures = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [myData, setMyData] = useState([]);
 
-  
     useEffect(
         () => {
-            console.log("Use Effect 1")
-            async function getLeagueId() {
-                var time = dateForApi()
-                console.log("Time : ", time)
-                const response = await fetch(`https://v3.football.api-sports.io/fixtures?season=2020&date=${time}`, {
-                    "method": "GET",
-                    "headers": {
-                        "x-rapidapi-host": "v3.football.api-sports.io",
-                        "x-rapidapi-key": "bb282edd25b616a90605f35b51ceb83d"
-                    }
-                })
-
-                if (!response.ok) {
-                    throw Error(response.statusText);
-                }
-                else {
-                    const data = await response.json()
-                    const data2 = await bubbleSortByTime(data['response'])
-                    setMyData(data2)
-
+            const getData = async () => {
+                try {
+                  const jsonValue = await AsyncStorage.getItem('@todaysFixture')
+                  return jsonValue != null ? JSON.parse(jsonValue) : null;
+                } catch(e) {
+                  // error reading value
+                  console.log("Error while reading data : ", e)
                 }
             }
 
-            if (!myData.length) {
-                console.log("True")
-                getLeagueId()
-            }
+            getData()
+            .then(res => {
+                if(res && res.data)
+                {
+                    setMyData(res.data)
+                    setIsLoading(!isLoading)
+                }
+            })
         },
         []
     )
+  
+    // useEffect(
+    //     () => {
+    //         console.log("Use Effect 1")
+    //         async function getLeagueId() {
+    //             var time = dateForApi()
+    //             console.log("Time : ", time)
+    //             const response = await fetch(`https://v3.football.api-sports.io/fixtures?season=2020&date=${time}`, {
+    //                 "method": "GET",
+    //                 "headers": {
+    //                     "x-rapidapi-host": "v3.football.api-sports.io",
+    //                     "x-rapidapi-key": "bb282edd25b616a90605f35b51ceb83d"
+    //                 }
+    //             })
 
-    useEffect(
-        () => {
-            console.log("Use Effect 2")
-            if (myData.length) {
-                console.log("Array is not empty second side effect")
-                for (let i = 0; i < myData.length; i++) {
-                    const element = myData[i];
-                    switch (element.league.id) {
-                        case 140:
-                            // Laliga
-                            console.log("----> laliga")
-                            fetchData[2].data.push(element)
-                            break;
-                        case 30:
-                            // Epl
-                            console.log("----> epl")
-                            fetchData[3].data.push(element)
-                            break;
-                        case 135:
-                            // Serie a
-                            console.log("----> sera a")
-                            fetchData[5].data.push(element)
-                            break;
-                        case 78:
-                            // Budesliga
-                            console.log("----> bundes")
-                            fetchData[4].data.push(element)
-                            break;
-                        case 2:
-                            // Champion league
-                            console.log("----> UCL")
-                            fetchData[0].data.push(element)
-                            break;
-                        case 3:
-                            // Europa league 
-                            console.log("----> europa")
-                            fetchData[1].data.push(element)
-                            break;
-                        default:
-                            break;
-                    }
-                }
+    //             if (!response.ok) {
+    //                 throw Error(response.statusText);
+    //             }
+    //             else {
+    //                 const data = await response.json()
+    //                 const data2 = await bubbleSortByTime(data['response'])
+    //                 setMyData(data2)
 
-                setIsLoading(!isLoading)
+    //             }
+    //         }
+
+    //         if (!myData.length) {
+    //             console.log("True")
+    //             getLeagueId()
+    //         }
+    //     },
+    //     []
+    // )
+
+    // useEffect(
+    //     () => {
+    //         console.log("Use Effect 2")
+    //         if (myData.length) {
+    //             console.log("Array is not empty second side effect")
+    //             for (let i = 0; i < myData.length; i++) {
+    //                 const element = myData[i];
+    //                 switch (element.league.id) {
+    //                     case 140:
+    //                         // Laliga
+    //                         console.log("----> laliga")
+    //                         fetchData[2].data.push(element)
+    //                         break;
+    //                     case 30:
+    //                         // Epl
+    //                         console.log("----> epl")
+    //                         fetchData[3].data.push(element)
+    //                         break;
+    //                     case 135:
+    //                         // Serie a
+    //                         console.log("----> sera a")
+    //                         fetchData[5].data.push(element)
+    //                         break;
+    //                     case 78:
+    //                         // Budesliga
+    //                         console.log("----> bundes")
+    //                         fetchData[4].data.push(element)
+    //                         break;
+    //                     case 2:
+    //                         // Champion league
+    //                         console.log("----> UCL")
+    //                         fetchData[0].data.push(element)
+    //                         break;
+    //                     case 3:
+    //                         // Europa league 
+    //                         console.log("----> europa")
+    //                         fetchData[1].data.push(element)
+    //                         break;
+    //                     default:
+    //                         break;
+    //                 }
+    //             }
+
+    //             setIsLoading(!isLoading)
 
                 
-            }
-            else {
-                console.log("My Data length ", myData.length)
-            }
-        },
-        [myData]
-    )
+    //         }
+    //         else {
+    //             console.log("My Data length ", myData.length)
+    //         }
+    //     },
+    //     [myData]
+    // )
 
 
     return <View>
@@ -229,7 +255,7 @@ export const UpcomingFixtures = () => {
             isLoading
             ? <Text>Loading</Text>
             : <FlatList
-            data={fetchData}
+            data={myData}
             renderItem={ff}
             keyExtractor={(item, index) => index.toString()}
                 />

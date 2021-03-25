@@ -17,23 +17,23 @@ import { MemodFixtureUI } from '../Fixtures/fixtureUI';
 const renderItem = ({ item }) => <MemodFixtureUI item={item} />
 
 const ff = ({ item }) => item.data.length
-? <View style={{ flexDirection: 'column' }}>
-<View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center' }} >
-    <Image
-        style={{ width: 60, height: 40 }}
-        source={item.logo}
+? <View >
+    <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center', marginTop: 5, marginBottom: 5, backgroundColor: '#FFFFFF' }} >
+        <Image
+            style={{ width: 60, height: 40 }}
+            source={item.logo}
+        />
+        <Text style={{ fontWeight: 'bold', marginStart: 10 }} >{item.title}</Text>
+    </View>
+
+    <FlatList
+        data={item.data}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
     />
-    <Text style={{ fontWeight: 'bold', marginStart: 10 }} >{item.title}</Text>
-</View>
-
-<FlatList
-    data={item.data}
-    renderItem={renderItem}
-    keyExtractor={(item, index) => index.toString()}
-/>
 
 
-</View>
+ </View>
 : null
 
 const fetchData = [

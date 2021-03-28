@@ -131,7 +131,7 @@ export const TodaysFixture = () =>
             }
 
             if (!myData.length) {
-                console.log("data length is zero")
+                // console.log("data length is zero")
                 
                 getData()
                 .then(res => {
@@ -151,7 +151,7 @@ export const TodaysFixture = () =>
                     }
                     else
                     {
-                        console.log("API Call  -------------> ")
+                        console.log("Today Fixture API Call  -------------> ")
                         getLeagueId()
                     }
                 })
@@ -169,40 +169,40 @@ export const TodaysFixture = () =>
 
     useEffect(
         () => {
-            console.log("Use Effect 2")
+            // console.log("Use Effect 2")
             if (myData.length) {
-                console.log("Array is not empty second side effect")
+                // console.log("Array is not empty second side effect")
                 for (let i = 0; i < myData.length; i++) {
                     const element = myData[i];
                     switch (element.league.id) {
                         case 140:
                             // Laliga
-                            console.log("----> laliga")
+                            // console.log("----> laliga")
                             fetchData[2].data.push(element)
                             break;
                         case 30:
                             // Epl
-                            console.log("----> epl")
+                            // console.log("----> epl")
                             fetchData[3].data.push(element)
                             break;
                         case 135:
                             // Serie a
-                            console.log("----> sera a")
+                            // console.log("----> sera a")
                             fetchData[5].data.push(element)
                             break;
                         case 78:
                             // Budesliga
-                            console.log("----> bundes")
+                            // console.log("----> bundes")
                             fetchData[4].data.push(element)
                             break;
                         case 2:
                             // Champion league
-                            console.log("----> UCL")
+                            // console.log("----> UCL")
                             fetchData[0].data.push(element)
                             break;
                         case 3:
                             // Europa league 
-                            console.log("----> europa")
+                            // console.log("----> europa")
                             fetchData[1].data.push(element)
                             break;
                         default:

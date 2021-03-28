@@ -108,5 +108,5 @@ export const dateForApi = () => {
         date = `0${date}`
     }
 
-    return `${year}-${month}-21`
+    return `${year}-${month}-${date}`
 }

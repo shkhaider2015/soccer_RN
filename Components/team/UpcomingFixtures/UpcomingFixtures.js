@@ -19,25 +19,32 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const renderItem = ({ item }) => <MemodFixtureUI item={item} />
 
-const ff = ({ item }) => item.data.length
-? <View >
-    <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center', marginTop: 5, marginBottom: 5, backgroundColor: '#FFFFFF' }} >
+const ff = ({ item }) => <View >
+    <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center', marginTop: 5, marginBottom: 5 }} >
         <Image
-            style={{ width: 60, height: 40 }}
+            style={{ width: 40, height: 40 }}
             source={item.logo}
         />
         <Text style={{ fontWeight: 'bold', marginStart: 10 }} >{item.title}</Text>
     </View>
 
-    <FlatList
-        data={item.data}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
-    />
+    {
+        item.data.length
+        ? <FlatList
+            data={item.data}
+            renderItem={renderItem}
+            keyExtractor={(item, index) => index.toString()}
+            />
+        : <Text> No Fixture today in {item.title} </Text>
+    }
+
+    
+        
+
+    
 
 
  </View>
-: null
 
 const fetchData = [
     {
@@ -99,8 +106,14 @@ export const UpcomingFixtures = () => {
             .then(res => {
                 if(res && res.data)
                 {
+                    console.log("Con True")
                     setMyData(res.data)
                     setIsLoading(!isLoading)
+                }
+                else
+                {
+                    console.log("Con False")
+                   setIsLoading(!isLoading) 
                 }
             })
         },
@@ -250,14 +263,14 @@ export const UpcomingFixtures = () => {
                 {/* </ScrollView> */}
             {/* </SafeAreaView>
         } */}
-
+{/* {console.log(myData.length)} */}
 {
             isLoading
             ? <Text>Loading</Text>
             : <FlatList
-            data={myData}
-            renderItem={ff}
-            keyExtractor={(item, index) => index.toString()}
+                data={myData}
+                renderItem={ff}
+                keyExtractor={(item, index) => index.toString()}
                 />
         }
 

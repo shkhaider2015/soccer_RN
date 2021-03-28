@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { bubbleSortByTime } from "../Utility/updateFixtureArray";
 import LeagueIDContext from "../team/Context/mCTX";
 
@@ -7,6 +8,27 @@ export const LaLigaFixture = () =>
 {
     const mCTX = useContext(LeagueIDContext);
     
+    const storeData = async (value) => {
+        try {
+            const jsonValue = JSON.stringify(value)
+            await AsyncStorage.setItem('@todaysFixture', jsonValue)
+        } catch (e) {
+          // saving error
+          console.log("Error while storing data : ", e)
+        }
+    }
+    
+    
+    const getData = async () => {
+        try {
+          const jsonValue = await AsyncStorage.getItem('@todaysFixture')
+          return jsonValue != null ? JSON.parse(jsonValue) : null;
+        } catch(e) {
+          // error reading value
+          console.log("Error while reading data : ", e)
+        }
+    }
+
     useEffect(
         () => {
             async function getLeagueId() {

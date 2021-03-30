@@ -143,4 +143,11 @@ export const LaLigaData = () =>
         },
         [data]
     )
+
+    useEffect(
+        () => {
+
+        },
+        [kjaskjkaj]
+    )
 }

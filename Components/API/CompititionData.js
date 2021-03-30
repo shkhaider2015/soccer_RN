@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Laliga_Logo from "../../RawData/images/laliga.png";
+import { bubbleSortByTime } from "../Utility/updateFixtureArray";
 
 
 const matchTime = (prevTime, currTime) => {
@@ -65,7 +67,7 @@ const getData = async (key) => {
     }
 }
 
-async function getLeagueData(uri) {
+async function getLeagueData(uri, shouldSort=true) {
                 
     const response = await fetch(uri, {
         "method": "GET",
@@ -80,7 +82,16 @@ async function getLeagueData(uri) {
     }
     else {
         const data = await response.json()
-        const sortedData = await bubbleSortByTime(data['response'])
+        let sortedData = null
+        // shouldSort ?  sortedData = await bubbleSortByTime(data['response']) : sortedData = data['response']
+        if(shouldSort)
+        {
+            sortedData = await bubbleSortByTime(data['response'])
+        }
+        else
+        {
+            sortedData = await data['response']
+        }
 
         return sortedData;
     }
@@ -89,23 +100,33 @@ async function getLeagueData(uri) {
 
 export const LaLigaData = () =>
 {
-    const [data, setData] = useState();
+    const [data, setData] = useState({});
     const [shouldAPICall, setShouldAPICall] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(
         () => {
             getData("@Laliga")
             .then(res => {
+                console.log(res)
                 if(res && !shouldAPICall)
                 {
+                    console.log("Res is true and sac is false")
                     if( !matchTime( res.lastCall, new Date().getTime() ) && !shouldAPICall )
                     {
                         // api call
+                        console.log("Time Not Matched")
                         setShouldAPICall(!shouldAPICall)
+                    }
+                    else
+                    {
+                        console.log("Time Matched !!")
+                        setIsLoading(!isLoading)
                     }
                 }
                 else
                 {
+                    console.log("res is false")
                     // first Api call
                     setShouldAPICall(!shouldAPICall)
                 }
@@ -117,14 +138,29 @@ export const LaLigaData = () =>
 
     useEffect(
         () => {
-            let laligaID = 140;
-            let season = 2020;
-            let uri = `https://v3.football.api-sports.io/fixtures?league=${laligaID}&season=${season}`
+            let fixturesURI = `https://v3.football.api-sports.io/fixtures?league=140&season=2020`
+            let StandingsURI = `https://v3.football.api-sports.io/standings?league=140&season=2020`
+            let StatesURI = `https://v3.football.api-sports.io/players/topscorers?league=140&season=2020`
 
             if(shouldAPICall)
             {
-               let data = getLeagueData(uri)
-               setData(data)
+                console.log("ShouldAPICall -->  API CALL ")
+               let fixturesData = getLeagueData(fixturesURI)
+               let standingData = getLeagueData(StandingsURI)
+               let stateData = getLeagueData(StatesURI, false)
+
+               
+
+
+               let dd = {
+                   fixtures: fixturesData,
+                   standings: standingData,
+                   states: stateData
+               }
+               setTimeout(() => {
+                   setData(dd)
+               }, 3000);
+            //    setData(dd)
             }
         },
         [shouldAPICall]
@@ -133,21 +169,41 @@ export const LaLigaData = () =>
     useEffect(
         () => {
 
-            if(data)
+            if(Object.keys(data).length)
             {
+                console.log("At Laliga : Data is not Null")
+                let time = new Date().getTime()
                 let value = {
-                    
+                    id: 140,
+                    name: "Laliga",
+                    logo: Laliga_Logo,
+                    lastCall: time,
+                    data: data
                 }
-                storeData("Laliga", )
+                storeData("@Laliga", value)
+                setIsLoading(!isLoading)
             }
         },
         [data]
     )
 
+
     useEffect(
         () => {
-
+            if(!isLoading)
+            {
+                getData("@Laliga").then(res => {
+                    if(res)
+                    {
+                        console.log("Res : ", res.data.fixtures._W)
+                    }
+                })
+                .catch(err => console.log("Error --> ", err) )
+                console.log("At Laliga : Process Complete")
+            }
         },
-        [kjaskjkaj]
+        [isLoading]
     )
+
+    
 }

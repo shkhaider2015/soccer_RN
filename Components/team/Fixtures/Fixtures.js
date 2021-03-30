@@ -5,7 +5,18 @@ import { useSelector, useDispatch } from 'react-redux'
 import { FixtureListUI } from './fixtureList'
 import { bubbleSortByTime } from "../../Utility/updateFixtureArray";
 import LeagueIdContext from '../Context/mCTX';
+import { LaLigaData } from '../../API/CompititionData';
 
+
+const getData = async (key) => {
+    try {
+        const jsonValue = await AsyncStorage.getItem(key)
+        return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch (e) {
+        // error reading value
+        console.log("Error while reading data : ", e)
+    }
+}
 
 const Fixtures = () => {
 
@@ -53,6 +64,10 @@ const Fixtures = () => {
         setFiltereddata(filterData)
     }
 
+    if(mCTX[0].id === 140)
+    {
+        LaLigaData()
+    }
     useEffect(
         () => {
 
@@ -81,7 +96,17 @@ const Fixtures = () => {
             }
 
             if (mCTX[0] !== null) {
-                getLeagueId()
+                if(mCTX[0].id === 140)
+                {
+                    console.log("No API Laliga")
+                    getData("@Laliga")
+                    .then(res => setFetcheddata(res.data.fixtures._W))
+                    .catch(err => console.log("Error"))
+                }
+                else
+                {
+                    getLeagueId()
+                }
 
             }
 

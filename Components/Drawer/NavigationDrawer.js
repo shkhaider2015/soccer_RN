@@ -13,7 +13,7 @@ const Drawer = createDrawerNavigator();
 export const NavigationDrawer = () =>
 {
     return <Drawer.Navigator initialRouteName="About" drawerContent={props => <DrawerContent {...props} /> } >
-    {/* <Drawer.Screen name="StackNavigator" component={MyStackNavigator}  /> */}
+    <Drawer.Screen name="StackNavigator" component={MyStackNavigator}  />
     <Drawer.Screen name="About" component={About} />
     <Drawer.Screen name="Upcoming Fixtures" component={UpcomingFixtures} />
     {/* <Drawer.Screen name="Laliga" component={Laliga} /> */}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Laliga_Logo from "../../RawData/images/laliga.png";
 import { bubbleSortByTime } from "../Utility/updateFixtureArray";
+import { getLeague } from "../Utility/LeagueDetails";
 
 
 const matchTime = (prevTime, currTime) => {
@@ -36,18 +37,6 @@ const matchTime = (prevTime, currTime) => {
 }
 
 
-const gg = {
-    id: 998,
-    name: 'laliga',
-    logo: 'kjhahj.png',
-    lastCall: 99878787878,
-    data : {
-        fixtures: [],
-        standings: [],
-        states: []
-    }
-}
-
 const storeData = async (key, value) => {
     try {
         const jsonValue = JSON.stringify(value)
@@ -66,6 +55,8 @@ const getData = async (key) => {
         console.log("Error while reading data : ", e)
     }
 }
+
+
 
 async function getLeagueData(uri, shouldSort=true) {
                 
@@ -98,15 +89,16 @@ async function getLeagueData(uri, shouldSort=true) {
 }
 
 
-export const LaLigaData = () =>
+export const LaLigaData = ({id}) =>
 {
     const [data, setData] = useState({});
     const [shouldAPICall, setShouldAPICall] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
+    var league = getLeague(id);
 
     useEffect(
         () => {
-            getData("@Laliga")
+            getData(league.databaseKey)
             .then(res => {
                 console.log(res)
                 if(res && !shouldAPICall)
@@ -145,9 +137,9 @@ export const LaLigaData = () =>
             if(shouldAPICall)
             {
                 console.log("ShouldAPICall -->  API CALL ")
-               let fixturesData = getLeagueData(fixturesURI)
-               let standingData = getLeagueData(StandingsURI)
-               let stateData = getLeagueData(StatesURI, false)
+               let fixturesData = getLeagueData(league.fixturesURI)
+               let standingData = getLeagueData(league.standingsURI)
+               let stateData = getLeagueData(league.statesURI, false)
 
                
 
@@ -180,7 +172,7 @@ export const LaLigaData = () =>
                     lastCall: time,
                     data: data
                 }
-                storeData("@Laliga", value)
+                storeData(league.databaseKey, value)
                 setIsLoading(!isLoading)
             }
         },
@@ -192,7 +184,7 @@ export const LaLigaData = () =>
         () => {
             if(!isLoading)
             {
-                getData("@Laliga").then(res => {
+                getData(league.databaseKey).then(res => {
                     if(res)
                     {
                         console.log("Res : ", res.data.fixtures._W)

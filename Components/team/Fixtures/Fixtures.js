@@ -6,6 +6,7 @@ import { FixtureListUI } from './fixtureList'
 import { bubbleSortByTime } from "../../Utility/updateFixtureArray";
 import LeagueIdContext from '../Context/mCTX';
 import { LaLigaData } from '../../API/CompititionData';
+import { getLeague } from "../../Utility/LeagueDetails";
 
 
 const getData = async (key) => {
@@ -26,6 +27,7 @@ const Fixtures = () => {
     const [fetchedData, setFetcheddata] = useState([])
     const [filteredData, setFiltereddata] = useState([])
     const [scrollIndex, setScrollIndex] = useState(null)
+    var league = getLeague(mCTX[0].id)
 
     console.log("jksfjksdjfkjdks : ", mCTX[0])
 
@@ -66,7 +68,7 @@ const Fixtures = () => {
 
     if(mCTX[0].id === 140)
     {
-        LaLigaData()
+        LaLigaData(mCTX[0].id)
     }
     useEffect(
         () => {
@@ -99,7 +101,7 @@ const Fixtures = () => {
                 if(mCTX[0].id === 140)
                 {
                     console.log("No API Laliga")
-                    getData("@Laliga")
+                    getData(league.databaseKey)
                     .then(res => setFetcheddata(res.data.fixtures._W))
                     .catch(err => console.log("Error"))
                 }

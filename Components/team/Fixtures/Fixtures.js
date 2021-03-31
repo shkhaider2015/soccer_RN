@@ -19,17 +19,20 @@ const getData = async (key) => {
     }
 }
 
-const Fixtures = () => {
 
+const Fixtures = () => {
+    
     const dispatch = useDispatch()
     const mCTX = useContext(LeagueIdContext)
     const select = useSelector(state => state)
     const [fetchedData, setFetcheddata] = useState([])
     const [filteredData, setFiltereddata] = useState([])
     const [scrollIndex, setScrollIndex] = useState(null)
+    const [isdataReady, setIsDataReady] = useState(true)
     var league = getLeague(mCTX[0].id)
-
+    
     console.log("jksfjksdjfkjdks : ", mCTX[0])
+    // LaLigaData(mCTX[0].id)
 
     const filterForSections = (arr) => {
         var keys = arr.map(
@@ -66,10 +69,9 @@ const Fixtures = () => {
         setFiltereddata(filterData)
     }
 
-    if(mCTX[0].id === 140)
-    {
-        LaLigaData(mCTX[0].id)
-    }
+    
+    
+    
     useEffect(
         () => {
 
@@ -98,17 +100,25 @@ const Fixtures = () => {
             }
 
             if (mCTX[0] !== null) {
-                if(mCTX[0].id === 140)
-                {
-                    console.log("No API Laliga")
+
+                    console.log("No API Laliga", league.databaseKey)
                     getData(league.databaseKey)
-                    .then(res => setFetcheddata(res.data.fixtures._W))
+                    .then(res => {
+                        console.log("Resource")
+                        if(res)
+                        {
+                            console.log("Resource is not null", res)
+                            // LaLigaData(mCTX[0].id)
+                            setFetcheddata(res.data.fixtures._W)
+                        }
+                        else
+                        {
+                            console.log("Resource is null")
+                            setIsDataReady(!isdataReady)
+                        }
+                    })
                     .catch(err => console.log("Error"))
-                }
-                else
-                {
-                    getLeagueId()
-                }
+                
 
             }
 
@@ -242,8 +252,13 @@ const Fixtures = () => {
         [fetchedData]
     )
 
-
-    return <View>
+    if(!isdataReady)
+    {
+        LaLigaData(mCTX[0].id)
+        return <Text>Data is not Ready ...</Text>
+    }else
+    {
+        return <View>
         {console.log("ScrollIndex : ", scrollIndex)}
         {/* {console.log("Data : ", filteredData[1]['data'])} */}
 
@@ -255,6 +270,9 @@ const Fixtures = () => {
 
 
     </View>
+    }
+
+    
 }
 
 export { Fixtures }

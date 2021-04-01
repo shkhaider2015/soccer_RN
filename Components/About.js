@@ -7,6 +7,6 @@ import { LaLigaData } from "./API/CompititionData";
 export const About = () =>
 {
     // TodaysFixture();
-    LaLigaData()
+    // LaLigaData()
     return <Text>About Page</Text>
 }

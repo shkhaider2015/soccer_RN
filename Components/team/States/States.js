@@ -36,7 +36,7 @@ const States = () => {
 
 
             if (mCTX[0] !== null) {
-                getLeagueTable()
+                // getLeagueTable()
             }
         },
         [mCTX[0]]

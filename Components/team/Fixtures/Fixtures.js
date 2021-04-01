@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { FixtureListUI } from './fixtureList'
 import { bubbleSortByTime } from "../../Utility/updateFixtureArray";
 import LeagueIdContext from '../Context/mCTX';
-import { LaLigaData } from '../../API/CompititionData';
+import { LaLigaData, getLeagueData1 } from '../../API/CompititionData';
 import { getLeague } from "../../Utility/LeagueDetails";
 
 
@@ -105,7 +105,7 @@ const Fixtures = () => {
                     getData(league.databaseKey)
                     .then(res => {
                         console.log("Resource")
-                        if(res)
+                        if(res.data.length)
                         {
                             console.log("Resource is not null", res)
                             // LaLigaData(mCTX[0].id)
@@ -254,7 +254,12 @@ const Fixtures = () => {
 
     if(!isdataReady)
     {
-        LaLigaData(mCTX[0].id)
+        // LaLigaData(mCTX[0].id)
+        if(getLeagueData1(mCTX[0].id))
+        {
+            setIsDataReady(!isdataReady)
+        }
+
         return <Text>Data is not Ready ...</Text>
     }else
     {

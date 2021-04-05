@@ -230,7 +230,7 @@ export const getLeagueData1 = async (id) => {
             states: stateData
         }
 
-        await sleep(3000)
+        await sleep(4000)
         // setTimeout(() => {
             data = dd
         // }, 3000);

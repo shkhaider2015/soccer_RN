@@ -114,7 +114,7 @@ const Fixtures = () => {
                         else
                         {
                             console.log("Resource is null")
-                            setIsDataReady(!isdataReady)
+                            setIsDataReady(false)
                         }
                     })
                     .catch(err => console.log("Error"))
@@ -252,20 +252,27 @@ const Fixtures = () => {
         [fetchedData]
     )
 
+    useEffect(
+        () => {
+            if(!isdataReady)
+            {
+                getLeagueData1(mCTX[0].id)
+                setTimeout(() => {
+                    setIsDataReady(true)
+                }, 4000);
+            }
+        },
+        [isdataReady]
+    )
+
     if(!isdataReady)
     {
         // LaLigaData(mCTX[0].id)
-        if(getLeagueData1(mCTX[0].id))
-        {
-            setIsDataReady(!isdataReady)
-        }
 
         return <Text>Data is not Ready ...</Text>
     }else
     {
         return <View>
-        {console.log("ScrollIndex : ", scrollIndex)}
-        {/* {console.log("Data : ", filteredData[1]['data'])} */}
 
         {
             scrollIndex === null

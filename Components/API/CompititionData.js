@@ -202,19 +202,29 @@ export const getLeagueData1 = async (id) => {
     var data = []
     var rtn = false
 
+    console.log("GetLeague 1 Called !!", league)
+
     getData(league.databaseKey)
         .then(res => {
-            if (res) {
+            if (res.data) {
+                console.log("Res ::: --> ", res)
                 if (!matchTime(res.lastCall, new Date().getTime())) {
+                    shouldAPICall = false
+                    console.log("Time Matched !!")
+                }
+                else
+                {
                     shouldAPICall = true
                 }
             }
             else {
+                console.log("Res.data is empty ::: --> ")
                 shouldAPICall = true
             }
         })
         .catch(err => console.error("ERROR IN GETLEAGUEDATA() : ", err))
 
+       await sleep(1000)
     if (shouldAPICall) {
         console.log("ShouldAPICall -->  API CALL ")
         let fixturesData = getLeagueData(league.fixturesURI)
@@ -222,6 +232,7 @@ export const getLeagueData1 = async (id) => {
         let stateData = getLeagueData(league.statesURI, false)
 
 
+        await sleep(4000)
 
 
         let dd = {
@@ -230,27 +241,28 @@ export const getLeagueData1 = async (id) => {
             states: stateData
         }
 
-        await sleep(4000)
         // setTimeout(() => {
             data = dd
         // }, 3000);
+        console.log("DD :: --> ", dd)
+        if (data) {
+            console.log("Data is True _______________________")
+            rtn = true;
+            let time = new Date().getTime()
+            let value = {
+                id: league.id,
+                name: league.name,
+                logo: league.logo,
+                lastCall: time,
+                data: data
+            }
+            storeData(league.databaseKey, value)
+        }
+    }
+    else
+    {
+        console.log("Should Not Api Called")
     }
 
-    // setTimeout(
-        // () => {
-            if (data) {
-                rtn = true;
-                let time = new Date().getTime()
-                let value = {
-                    id: league.id,
-                    name: league.name,
-                    logo: league.logo,
-                    lastCall: time,
-                    data: data
-                }
-                storeData(league.databaseKey, value)
-            }
-        // }, 4000
-    // )
     return rtn;
 }

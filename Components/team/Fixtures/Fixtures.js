@@ -249,17 +249,32 @@ const Fixtures = () => {
             }
 
         },
-        [fetchedData]
+        [fetchedData, isdataReady]
     )
 
     useEffect(
         () => {
             if(!isdataReady)
             {
-                getLeagueData1(mCTX[0].id)
+                var gg = getLeagueData1(mCTX[0].id)
                 setTimeout(() => {
-                    setIsDataReady(true)
-                }, 4000);
+                    getData(league.databaseKey)
+                    .then(res => {
+                        console.log()
+                        if(res.data)
+                        {
+                            console.log("In Last effect : Res is not null")
+                            setFetcheddata(res.data.fixtures._W)
+                            setIsDataReady(true)
+                        }
+                        else
+                        {
+                            console.log("In Last effect : Res is null")
+                            setIsDataReady(false)
+                        }
+                    })
+                    .catch(err => console.error(err))
+                }, 8000);
             }
         },
         [isdataReady]

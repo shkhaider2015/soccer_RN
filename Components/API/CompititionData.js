@@ -266,3 +266,8 @@ export const getLeagueData1 = async (id) => {
 
     return rtn;
 }
+
+
+const getDData = () => {
+
+}

@@ -253,7 +253,7 @@ const Fixtures = () => {
     )
 
     useEffect(
-        () => {
+        () =>  {
             if(!isdataReady)
             {
                 var gg = getLeagueData1(mCTX[0].id)

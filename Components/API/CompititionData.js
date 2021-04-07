@@ -269,5 +269,6 @@ export const getLeagueData1 = async (id) => {
 
 
 const getDData = () => {
+    console.log("Its 8th april")
 
 }

@@ -304,5 +304,3 @@ const Fixtures = () => {
 
 export { Fixtures }
 
-
-const gg = 2021

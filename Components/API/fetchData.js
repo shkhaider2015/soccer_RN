@@ -89,7 +89,10 @@ function sleep(ms) {
   }
 
 
-
+const gg = 9009
+const gfg = 9009
+const gjg = 9009
+const gkg = 9009
 
   
 export const LaLigaData = ({ id }) => {
